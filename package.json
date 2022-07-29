@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/lodash": "^4.14.182",
+    "typescript": "^4.7.4",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "css-loader": "^6.7.1",
@@ -27,9 +27,7 @@
     "webpack-manifest-plugin": "^5.0.0"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^4.7.4"
+    "react-dom": "^18.2.0"
   }
 }
