@@ -24,8 +24,8 @@ const manifestOptions = {
 module.exports = {
   mode: "development",
   entry: {
-    main: "./src/index.js",
-    shout: "./src/shouting.js",
+    main: "./src/index.ts",
+    shout: "./src/shouting.ts",
   },
   output: {
     filename: "[name]-[contenthash].js",
@@ -45,10 +45,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(ts|tsx)$/i,
+        loader: "ts-loader",
+        exclude: ["/node_modules/"],
+      },
+      {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
     ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   optimization: {
     runtimeChunk: "single",
