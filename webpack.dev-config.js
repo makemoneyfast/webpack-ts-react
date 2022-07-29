@@ -24,7 +24,7 @@ const manifestOptions = {
 module.exports = {
   mode: "development",
   entry: {
-    main: "./src/index.ts",
+    main: "./src/index.tsx",
     shout: "./src/shouting.ts",
   },
   output: {
