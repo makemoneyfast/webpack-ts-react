@@ -1,10 +1,12 @@
-import { render } from "react-dom";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
 import "./style.css";
 import { shout } from "./shouting";
 
-const element = document.createElement("div");
-document.body.appendChild(element);
+const container = document.createElement("div");
+document.body.appendChild(container);
 
-render(<h1>Hello! I am React in Typescript.</h1>, element);
+const root = createRoot(container);
+root.render(<h1>Hello! I am React in Typescript.</h1>);
 shout();
