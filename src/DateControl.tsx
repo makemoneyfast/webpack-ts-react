@@ -39,27 +39,43 @@ export const DateControl = (props: IDateControlProps) => {
         ref={dayRef}
         value={props.day}
         onKeyUp={(e) => {
-          monthRef.current?.focus();
+          //   if (e.key === "Backspace" && e.target.selectionStart === 0) {
+          //   }
+          //   monthRef.current?.focus();
         }}
-        onChange={(e) => props.onChange("d", e.target.value + "!")}
+        onChange={(e) =>
+          props.onChange("d", e.target.value.replace(/\D/g, "").slice(0, 2))
+        }
       />
       <input
         type="text"
         ref={monthRef}
         value={props.month}
         onKeyUp={(e) => {
-          yearRef.current?.focus();
+          if (e.key === "Backspace" && e.target.selectionStart === 0) {
+            dayRef.current?.focus();
+            props.onChange("d", e.target.value.replace(/\D/g, "").slice(0, 1));
+          }
+          //yearRef.current?.focus();
         }}
-        onChange={(e) => props.onChange("m", e.target.value + "!")}
+        onChange={(e) =>
+          props.onChange("m", e.target.value.replace(/\D/g, "").slice(0, 2))
+        }
       />
       <input
         type="text"
         ref={yearRef}
         value={props.year}
         onKeyUp={(e) => {
-          dayRef.current?.focus();
+          if (e.key === "Backspace" && e.target.selectionStart === 0) {
+            monthRef.current?.focus();
+            props.onChange("m", e.target.value.replace(/\D/g, "").slice(0, 1));
+          }
+          //dayRef.current?.focus();
         }}
-        onChange={(e) => props.onChange("y", e.target.value + "?")}
+        onChange={(e) =>
+          props.onChange("y", e.target.value.replace(/\D/g, "").slice(0, 4))
+        }
       />
     </div>
   );
