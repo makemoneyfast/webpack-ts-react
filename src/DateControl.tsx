@@ -39,25 +39,26 @@ export const DateControl = (props: IDateControlProps) => {
         ref={dayRef}
         value={props.day}
         onKeyUp={(e) => {
-          if (!keyFilter[e.key]) {
-            console.log("key press BLOCKED");
-          } else {
-            console.log("key press ALLOWED");
-            //props.onChange("d", props.day);
-          }
-          props.onChange("d", e.target.value + "#");
+          monthRef.current?.focus();
         }}
+        onChange={(e) => props.onChange("d", e.target.value + "!")}
       />
       <input
         type="text"
         ref={monthRef}
         value={props.month}
+        onKeyUp={(e) => {
+          yearRef.current?.focus();
+        }}
         onChange={(e) => props.onChange("m", e.target.value + "!")}
       />
       <input
         type="text"
         ref={yearRef}
         value={props.year}
+        onKeyUp={(e) => {
+          dayRef.current?.focus();
+        }}
         onChange={(e) => props.onChange("y", e.target.value + "?")}
       />
     </div>
