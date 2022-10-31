@@ -28,10 +28,6 @@ export const DateControl = (props: IDateControlProps) => {
     "9": true,
   };
 
-  const updateEverything = (d: string, m: string, y: string) => {
-    props.onBulkChange(d, m, y);
-  };
-
   console.log(`DateControl ${props.day}:${props.month}:${props.year}`);
   return (
     <div>
@@ -60,14 +56,29 @@ export const DateControl = (props: IDateControlProps) => {
           console.log(
             `Day onchange fires, props: ${props.day}:${props.month}:${props.year}, field: ${e.target.value}`
           );
-          const buffer = `${e.target.value.replace(/\D/g, "")}${props.month}${
-            props.year
-          }`.slice(0, 8);
-          props.onBulkChange(
-            buffer.slice(0, 2),
-            buffer.slice(2, 4),
-            buffer.slice(4, 8)
+
+          let newDayValue = e.target.value.replace(/\D/g, "");
+          let newMonthValue: string = props.month;
+          let newYearValue: string = props.year;
+          const currentFieldContent = props.day;
+
+          if (newDayValue.length === 3) {
+            //push the character into the next field and focus it? Can we?
+            newMonthValue = `${newDayValue.slice(2)}${props.month}`;
+            if (newMonthValue.length === 3) {
+              newYearValue = `${newMonthValue.slice(2)}${props.year}`.slice(
+                0,
+                4
+              );
+              newMonthValue = newMonthValue.slice(0, 2);
+            }
+            newDayValue = newDayValue.slice(0, 2);
+          }
+
+          console.log(
+            `dispatching ${newDayValue}:${newMonthValue}:${newYearValue}`
           );
+          props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
       <input
@@ -83,14 +94,21 @@ export const DateControl = (props: IDateControlProps) => {
           console.log(
             `Month onchange fires, props: ${props.day}:${props.month}:${props.year}, field: ${e.target.value}`
           );
-          const buffer = `${props.day}${e.target.value.replace(/\D/g, "")}${
-            props.year
-          }`.slice(0, 8);
-          props.onBulkChange(
-            buffer.slice(0, 2),
-            buffer.slice(2, 4),
-            buffer.slice(4, 8)
+
+          let newDayValue: string = props.day;
+          let newMonthValue: string = e.target.value.replace(/\D/g, "");
+          let newYearValue: string = props.year;
+          const currentFieldContent = props.month;
+
+          if (newMonthValue.length === 3) {
+            newYearValue = `${newMonthValue.slice(2)}${props.year}`.slice(0, 4);
+            newMonthValue = newMonthValue.slice(0, 2);
+          }
+
+          console.log(
+            `dispatching ${newDayValue}:${newMonthValue}:${newYearValue}`
           );
+          props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
       <input
@@ -105,14 +123,10 @@ export const DateControl = (props: IDateControlProps) => {
           //dayRef.current?.focus();
         }}
         onChange={(e) => {
-          const buffer = `${props.day}${props.month}${e.target.value.replace(
-            /\D/g,
-            ""
-          )}`.slice(0, 8);
           props.onBulkChange(
-            buffer.slice(0, 2),
-            buffer.slice(2, 4),
-            buffer.slice(4, 8)
+            props.day,
+            props.month,
+            e.target.value.replace(/\D/g, "").slice(0, 4)
           );
         }}
       />
