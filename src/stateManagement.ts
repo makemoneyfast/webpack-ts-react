@@ -24,10 +24,10 @@ export const reducer: (state: IState, action: Action) => IState = (
   state: IState,
   action: Action
 ) => {
-  console.log("reduce", action);
+  //console.log("reduce", action);
   switch (action.type) {
     case "change":
-      console.log("change!");
+      //console.log("change!");
       switch (action.payload.field) {
         case "d":
           return { ...state, day: action.payload.value };

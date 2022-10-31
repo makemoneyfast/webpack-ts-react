@@ -5,7 +5,6 @@ import { DateControl } from "./dateControl";
 
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, createInitialState());
-  console.log("App rerenders");
   return (
     <DateControl
       day={state.day}
