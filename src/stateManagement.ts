@@ -11,7 +11,12 @@ interface IChangeAction {
   payload: { field: FieldId; value: string };
 }
 
-export type Action = IChangeAction;
+interface IBulkChangeAction {
+  type: "bulkChange";
+  payload: { day: string; month: string; year: string };
+}
+
+export type Action = IChangeAction | IBulkChangeAction;
 
 export const createInitialState = () =>
   ({
@@ -36,5 +41,13 @@ export const reducer: (state: IState, action: Action) => IState = (
         case "y":
           return { ...state, year: action.payload.value };
       }
+      break;
+    case "bulkChange":
+      return {
+        ...state,
+        day: action.payload.day,
+        month: action.payload.month,
+        year: action.payload.year,
+      };
   }
 };

@@ -13,6 +13,9 @@ export const App = () => {
       onChange={(field: FieldId, value: string) =>
         dispatch({ type: "change", payload: { value, field } })
       }
+      onBulkChange={(day: string, month: string, year: string) =>
+        dispatch({ type: "bulkChange", payload: { day, month, year } })
+      }
     />
   );
 };
