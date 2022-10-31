@@ -62,6 +62,9 @@ export const DateControl = (props: IDateControlProps) => {
           let newYearValue: string = props.year;
           const currentFieldContent = props.day;
 
+          console.log(">>", dayRef.current?.selectionStart);
+          const selectionStart = dayRef.current?.selectionStart;
+
           if (newDayValue.length === 3) {
             //push the character into the next field and focus it? Can we?
             newMonthValue = `${newDayValue.slice(2)}${props.month}`;
@@ -78,6 +81,10 @@ export const DateControl = (props: IDateControlProps) => {
           console.log(
             `dispatching ${newDayValue}:${newMonthValue}:${newYearValue}`
           );
+
+          if (selectionStart === 3) {
+            monthRef.current?.focus();
+          }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
@@ -100,6 +107,9 @@ export const DateControl = (props: IDateControlProps) => {
           let newYearValue: string = props.year;
           const currentFieldContent = props.month;
 
+          console.log("++", dayRef.current?.selectionStart);
+          const selectionStart = monthRef.current?.selectionStart;
+
           if (newMonthValue.length === 3) {
             newYearValue = `${newMonthValue.slice(2)}${props.year}`.slice(0, 4);
             newMonthValue = newMonthValue.slice(0, 2);
@@ -108,6 +118,10 @@ export const DateControl = (props: IDateControlProps) => {
           console.log(
             `dispatching ${newDayValue}:${newMonthValue}:${newYearValue}`
           );
+
+          if (selectionStart === 3) {
+            yearRef.current?.focus();
+          }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
