@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FieldId } from "./stateManagement";
 
 interface IDateControlProps {
@@ -16,6 +16,9 @@ export const DateControl = (props: IDateControlProps) => {
   const yearRef = useRef<HTMLInputElement>(null);
 
   const [monthDeletion, setMonthDeletion] = useState(false);
+  const [yearCursorPosition, setYearCursorPosition] = useState<
+    number | undefined
+  >(undefined);
 
   const numericKeyFilter: { [key: string]: boolean } = {
     "0": true,
@@ -29,6 +32,11 @@ export const DateControl = (props: IDateControlProps) => {
     "8": true,
     "9": true,
   };
+
+  useEffect(() => {
+    console.log("THE EFFECT");
+    yearRef.current?.setSelectionRange(2, 2);
+  }, [yearCursorPosition]);
 
   console.log(`DateControl ${props.day}:${props.month}:${props.year}`);
   return (
@@ -59,6 +67,7 @@ export const DateControl = (props: IDateControlProps) => {
           let newMonthValue: string = props.month;
           let newYearValue: string = props.year;
           let overflow = false;
+          let trimmed = false;
           const selectionStart = dayRef.current?.selectionStart;
 
           if (newDayValue.length === 3) {
@@ -72,12 +81,19 @@ export const DateControl = (props: IDateControlProps) => {
             }
             // Trim the content to fit the field.
             newDayValue = newDayValue.slice(0, 2);
+            trimmed = true;
           }
 
           if (overflow) {
             // Send keyboard focus to the overflow field if input text has
             // overflowed.
             monthRef.current?.focus();
+          }
+          if (trimmed) {
+            dayRef.current?.setSelectionRange(
+              selectionStart + 1,
+              selectionStart + 1
+            );
           }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
@@ -127,11 +143,22 @@ export const DateControl = (props: IDateControlProps) => {
           //dayRef.current?.focus();
         }}
         onChange={(e) => {
+          const selectionStart = e.target.selectionStart;
+
+          const rawValue = e.target.value;
+          const constrainedValue = rawValue.replace(/\D/g, "").slice(0, 4);
+
+          // if(rawValue !== constrainedValue) {
+
+          // }
+
+          setYearCursorPosition(2);
           props.onBulkChange(
             props.day,
             props.month,
             e.target.value.replace(/\D/g, "").slice(0, 4)
           );
+          e.target.setSelectionRange(2, 2);
         }}
       />
     </div>
