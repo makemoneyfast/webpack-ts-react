@@ -2,6 +2,7 @@ export interface IState {
   day: string;
   month: string;
   year: string;
+  controlled: string;
 }
 
 export type FieldId = "d" | "m" | "y";
@@ -16,13 +17,19 @@ interface IBulkChangeAction {
   payload: { day: string; month: string; year: string };
 }
 
-export type Action = IChangeAction | IBulkChangeAction;
+interface IControlAction {
+  type: "control";
+  payload: { new: string };
+}
+
+export type Action = IChangeAction | IBulkChangeAction | IControlAction;
 
 export const createInitialState = () =>
   ({
     day: "",
     month: "",
     year: "",
+    controlled: "",
   } as IState);
 
 export const reducer: (state: IState, action: Action) => IState = (
@@ -49,5 +56,9 @@ export const reducer: (state: IState, action: Action) => IState = (
         month: action.payload.month,
         year: action.payload.year,
       };
+      break;
+    case "control":
+      return { ...state, controlled: action.payload.new.slice(0, 8) };
+      break;
   }
 };
