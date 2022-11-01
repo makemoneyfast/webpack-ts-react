@@ -11,14 +11,11 @@ interface IDateControlProps {
 }
 
 export const DateControl = (props: IDateControlProps) => {
+  const { day, month, year } = props;
   const dayRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
-
-  const [monthDeletion, setMonthDeletion] = useState(false);
-  const [yearCursorPosition, setYearCursorPosition] = useState<
-    number | undefined
-  >(undefined);
+  const [cursor, setCursor] = useState<string>(null);
 
   const numericKeyFilter: { [key: string]: boolean } = {
     "0": true,
@@ -34,29 +31,43 @@ export const DateControl = (props: IDateControlProps) => {
   };
 
   useEffect(() => {
-    console.log("THE EFFECT");
-    yearRef.current?.setSelectionRange(2, 2);
-  }, [yearCursorPosition]);
+    if (cursor !== null) {
+      const [field, positionAsString] = cursor?.split(":");
+      const position = parseInt(positionAsString);
+      console.log(`THE EFFECT: ${cursor}`);
+      switch (field) {
+        case "d":
+          dayRef.current?.setSelectionRange(position, position);
+          break;
+        case "m":
+          monthRef.current?.setSelectionRange(position, position);
+          break;
+        case "y":
+          yearRef.current?.setSelectionRange(position, position);
+          break;
+      }
+    }
+  }, [cursor, day, month, year, dayRef, monthRef, yearRef]);
 
-  console.log(`DateControl ${props.day}:${props.month}:${props.year}`);
+  console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
     <div>
       <input
         type="text"
         ref={dayRef}
-        value={props.day}
+        value={day}
         onKeyUp={(e) => {
           console.log(
-            `Day keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${props.day}`
+            `Day keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${day}`
           );
           // if (
           //   numericKeyFilter[e.key] &&
           //   e.target.selectionStart === 2 &&
-          //   props.month.length < 2
+          //   month.length < 2
           // ) {
           //   monthRef.current?.focus();
           //   monthRef.current?.setSelectionRange(0, 0);
-          //   props.onChange("m", e.key + props.month);
+          //   props.onChange("m", e.key + month);
           // }
           //   if (e.key === "Backspace" && e.target.selectionStart === 0) {
           //   }
@@ -64,15 +75,15 @@ export const DateControl = (props: IDateControlProps) => {
         }}
         onChange={(e) => {
           let newDayValue = e.target.value.replace(/\D/g, "");
-          let newMonthValue: string = props.month;
-          let newYearValue: string = props.year;
+          let newMonthValue: string = month;
+          let newYearValue: string = year;
           let overflow = false;
           let trimmed = false;
           const selectionStart = dayRef.current?.selectionStart;
 
           if (newDayValue.length === 3) {
             // we've exceeded the input field length.
-            if (props.month.length === 0 && selectionStart === 3) {
+            if (month.length === 0 && selectionStart === 3) {
               // If the next field is empty and we're typing excess characters
               // at the end of this field, the overflow character goes into the
               // next field.
@@ -88,37 +99,40 @@ export const DateControl = (props: IDateControlProps) => {
             // Send keyboard focus to the overflow field if input text has
             // overflowed.
             monthRef.current?.focus();
+            setCursor(`m:1`);
+          } else {
+            setCursor(`d:${e.target.selectionStart}`);
           }
-          if (trimmed) {
-            dayRef.current?.setSelectionRange(
-              selectionStart + 1,
-              selectionStart + 1
-            );
-          }
+          // if (trimmed) {
+          //   dayRef.current?.setSelectionRange(
+          //     selectionStart + 1,
+          //     selectionStart + 1
+          //   );
+          // }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
       <input
         type="text"
         ref={monthRef}
-        value={props.month}
+        value={month}
         onKeyUp={(e) => {
           console.log(
-            `Month keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${props.month}`
+            `Month keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${month}`
           );
         }}
         onChange={(e) => {
           console.log("Month onchange");
-          let newDayValue: string = props.day;
+          let newDayValue: string = day;
           let newMonthValue: string = e.target.value.replace(/\D/g, "");
-          let newYearValue: string = props.year;
+          let newYearValue: string = year;
           let overflow = false;
 
           const selectionStart = monthRef.current?.selectionStart;
 
           // See similar logic in day field onChange handler.
           if (newMonthValue.length === 3) {
-            if (props.year.length === 0 && selectionStart === 3) {
+            if (year.length === 0 && selectionStart === 3) {
               newYearValue = newMonthValue.slice(2);
               overflow = true;
             }
@@ -127,6 +141,9 @@ export const DateControl = (props: IDateControlProps) => {
 
           if (overflow) {
             yearRef.current?.focus();
+            setCursor(`y:1`);
+          } else {
+            setCursor(`m:${e.target.selectionStart}`);
           }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
@@ -134,7 +151,7 @@ export const DateControl = (props: IDateControlProps) => {
       <input
         type="text"
         ref={yearRef}
-        value={props.year}
+        value={year}
         onKeyUp={(e) => {
           // if (e.key === "Backspace" && e.target.selectionStart === 0) {
           //   monthRef.current?.focus();
@@ -152,13 +169,13 @@ export const DateControl = (props: IDateControlProps) => {
 
           // }
 
-          setYearCursorPosition(2);
+          setCursor(`y:${e.target.selectionStart}`);
           props.onBulkChange(
-            props.day,
-            props.month,
+            day,
+            month,
             e.target.value.replace(/\D/g, "").slice(0, 4)
           );
-          e.target.setSelectionRange(2, 2);
+          // e.target.setSelectionRange(2, 2);
         }}
       />
     </div>
