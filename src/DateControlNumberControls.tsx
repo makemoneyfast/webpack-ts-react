@@ -33,7 +33,7 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
         max="31"
         onKeyUp={(e) => {
           console.log(
-            `Day keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${day}`
+            `Day keypress. Key: ${e.key} Field value ${e.target.value} Prop ${day}`
           );
           // if (
           //   numericKeyFilter[e.key] &&
@@ -95,7 +95,7 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
         max="12"
         onKeyUp={(e) => {
           console.log(
-            `Month keypress. Key: ${e.key} Selection start: ${e.target.selectionStart} Field value ${e.target.value} Prop ${month}`
+            `Month keypress. Key: ${e.key} Field value ${e.target.value} Prop ${month}`
           );
         }}
         onChange={(e) => {
@@ -132,26 +132,18 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
         pattern="[0-9]*"
         min="0"
         max="2022"
-        onKeyUp={(e) => {
-          // if (e.key === "Backspace" && e.target.selectionStart === 0) {
-          //   monthRef.current?.focus();
-          //   props.onChange("m", e.target.value.replace(/\D/g, "").slice(0, 1));
-          // }
-          //dayRef.current?.focus();
-        }}
         onChange={(e) => {
           const rawValue = e.target.value;
           console.log(`Year change value is ${rawValue}`);
 
-          // if(rawValue !== constrainedValue) {
+          let valueToWrite = e.target.value;
 
-          // }
+          if (valueToWrite.length >= 4) {
+            const aa = parseInt(rawValue);
+            valueToWrite = Math.min(Math.max(aa, 1900), 2022).toString();
+          }
 
-          props.onBulkChange(
-            day,
-            month,
-            e.target.value.replace(/\D/g, "").slice(0, 4)
-          );
+          props.onBulkChange(day, month, valueToWrite);
           // e.target.setSelectionRange(2, 2);
         }}
       />
