@@ -1,15 +1,15 @@
 import React from "react";
 import { useReducer } from "react";
 import { createInitialState, FieldId, reducer } from "./stateManagement";
-import { DateControl } from "./dateControl";
+import { DateControlWithNumbers } from "./DateControlNumberControls";
 import { ControlledInput } from "./ControlledInput";
 
-export const App = () => {
+export const NumberBasedApp = () => {
   const [state, dispatch] = useReducer(reducer, createInitialState());
   return (
     <div>
-      <h3>String-based implementation</h3>
-      <DateControl
+      <h3>Number-based implementation</h3>
+      <DateControlWithNumbers
         day={state.day}
         month={state.month}
         year={state.year}
