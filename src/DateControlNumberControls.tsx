@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { FieldId } from "./stateManagement";
+import styled from "styled-components";
 
 interface IDateControlProps {
   day: string;
@@ -9,6 +10,10 @@ interface IDateControlProps {
   onChange: (fieldId: FieldId, value: string) => void;
   onBulkChange: (day: string, month: string, year: string) => void;
 }
+
+const BorderlessInput = styled.input`
+  border-width: 0;
+`;
 
 export const DateControlWithNumbers = (props: IDateControlProps) => {
   const { day, month, year } = props;
@@ -19,7 +24,7 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
   console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
     <div>
-      <input
+      <BorderlessInput
         type="number"
         ref={dayRef}
         value={day}
@@ -80,7 +85,8 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
-      <input
+      /
+      <BorderlessInput
         type="number"
         ref={monthRef}
         value={month}
@@ -118,7 +124,8 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
       />
-      <input
+      /
+      <BorderlessInput
         type="number"
         ref={yearRef}
         value={year}
