@@ -52,7 +52,7 @@ export const DateControl = (props: IDateControlProps) => {
 
   console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
-    <div>
+    <div className={"focussedBox"}>
       <BorderlessInput
         width={1.1}
         type="text"
