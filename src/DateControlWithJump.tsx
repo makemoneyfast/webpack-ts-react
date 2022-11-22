@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { FieldId } from "./stateManagement";
+import { BorderlessInput } from "./styledComponents";
 
 interface IDateControlProps {
   day: string;
@@ -52,7 +53,7 @@ export const DateControl = (props: IDateControlProps) => {
   console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
     <div>
-      <input
+      <BorderlessInput
         type="number"
         ref={dayRef}
         value={day}
@@ -114,8 +115,9 @@ export const DateControl = (props: IDateControlProps) => {
           // }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
-      />
-      <input
+      />{" "}
+      /
+      <BorderlessInput
         type="number"
         ref={monthRef}
         value={month}
@@ -153,8 +155,9 @@ export const DateControl = (props: IDateControlProps) => {
           }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
-      />
-      <input
+      />{" "}
+      /
+      <BorderlessInput
         type="number"
         ref={yearRef}
         value={year}
