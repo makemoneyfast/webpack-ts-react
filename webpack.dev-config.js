@@ -50,23 +50,13 @@ module.exports = {
         exclude: ["/node_modules/"],
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-        options: {
-          sourceMap: true,
-        },
-      },
-      {
-        test: /\.less$/i,
+        test: /\.(css|less)$/i,
         use: [
           // compiles Less to CSS
           "style-loader",
           "css-loader",
           "less-loader",
         ],
-        options: {
-          sourceMap: true,
-        },
       },
     ],
   },
