@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import "./style.css";
 import "./style.less";
+import "./style.scss";
 import { shout } from "./shouting";
 
 const container = document.createElement("div");
@@ -28,6 +29,11 @@ root.render(
       easier to read than native CSS syntax because there are no function calls,
       variable declarations are not scoped, they just start with an{" "}
       <code>@</code>. Nice and easy.
+    </p>
+    <h1 className="sassFirstItem">OK so how about SASS?</h1>
+    <p>
+      SASS is very complicated. We don't need its sophisticated features. But
+      for variables and arithmetic it seems straightforward enough.
     </p>
   </div>
 );

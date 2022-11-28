@@ -1,0 +1,7 @@
+$column: 3rem;
+$firstItemWidth: 10;
+
+.sassFirstItem {
+    background-color: rgb(81, 51, 83);
+    max-width: ($firstItemWidth + 8) * $column;
+}
