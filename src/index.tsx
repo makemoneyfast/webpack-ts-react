@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import "./style.css";
+import "./style.less";
 import { shout } from "./shouting";
 
 const container = document.createElement("div");
@@ -20,6 +21,13 @@ root.render(
     <p>
       It's quite possible to do arithmetic entirely with variable values, using
       the <code>calc</code> function.
+    </p>
+    <h1 className="lessFirstItem">How about LESS?</h1>
+    <p>
+      Maybe we can do inline arithmetic with LESS. We can! The syntax is a lot
+      easier to read than native CSS syntax because there are no function calls,
+      variable declarations are not scoped, they just start with an{" "}
+      <code>@</code>. Nice and easy.
     </p>
   </div>
 );
