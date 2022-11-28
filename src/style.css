@@ -1,8 +1,11 @@
 :root {
   --nice-yellow: #fc0;
+  --two-rem: 2rem;
+  --the-number-ten: 30;
 }
 
 .hello {
   color: #c00;
   background-color: var(--nice-yellow);
+  max-width: calc(var(--the-number-ten) * var(--two-rem));
 }
