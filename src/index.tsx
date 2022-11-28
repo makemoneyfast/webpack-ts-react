@@ -8,5 +8,5 @@ const container = document.createElement("div");
 document.body.appendChild(container);
 
 const root = createRoot(container);
-root.render(<h1>Hello! I am React in Typescript.</h1>);
+root.render(<h1 className="hello">Hello! I am React in Typescript.</h1>);
 shout();
