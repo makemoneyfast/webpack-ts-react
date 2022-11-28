@@ -52,6 +52,21 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
+        options: {
+          sourceMap: true,
+        },
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          // compiles Less to CSS
+          "style-loader",
+          "css-loader",
+          "less-loader",
+        ],
+        options: {
+          sourceMap: true,
+        },
       },
     ],
   },

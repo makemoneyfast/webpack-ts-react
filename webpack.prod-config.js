@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const manifestOptions = {
   fileName: "asset-manifest.json",
@@ -37,6 +38,7 @@ module.exports = {
       title: "Something something",
     }),
     new WebpackManifestPlugin(manifestOptions),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
@@ -46,8 +48,13 @@ module.exports = {
         exclude: ["/node_modules/"],
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.(css|less)$/i,
+        use: [
+          // compiles Less to CSS
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "less-loader",
+        ],
       },
     ],
   },
