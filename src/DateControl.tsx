@@ -2,6 +2,8 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { FieldId } from "./stateManagement";
 import { BorderlessInput } from "./styledComponents";
+import "./style.css";
+import { container } from "webpack";
 
 interface IDateControlProps {
   day: string;
@@ -16,6 +18,7 @@ export const DateControl = (props: IDateControlProps) => {
   const dayRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [cursor, setCursor] = useState<string>(null);
 
   const numericKeyFilter: { [key: string]: boolean } = {
@@ -52,7 +55,15 @@ export const DateControl = (props: IDateControlProps) => {
 
   console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
-    <div className={"focussedBox"}>
+    <div
+      className={"unfocussedBox"}
+      ref={containerRef}
+      onBlur={(e) => {
+        e.stopPropagation();
+        containerRef.current?.classList?.add("unfocussedBox");
+        containerRef.current?.classList?.remove("focussedBox");
+      }}
+    >
       <BorderlessInput
         width={1.1}
         type="text"
@@ -113,6 +124,10 @@ export const DateControl = (props: IDateControlProps) => {
           // }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
+        }}
       />
       /
       <BorderlessInput
@@ -151,6 +166,10 @@ export const DateControl = (props: IDateControlProps) => {
           }
           props.onBulkChange(newDayValue, newMonthValue, newYearValue);
         }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
+        }}
       />
       /
       <BorderlessInput
@@ -182,6 +201,10 @@ export const DateControl = (props: IDateControlProps) => {
             e.target.value.replace(/\D/g, "").slice(0, 4)
           );
           // e.target.setSelectionRange(2, 2);
+        }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
         }}
       />
     </div>

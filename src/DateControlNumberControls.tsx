@@ -2,6 +2,7 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { FieldId } from "./stateManagement";
 import { BorderlessInput } from "./styledComponents";
+import "./style.css";
 
 // We can't overflow because we don't have the cursor position.
 // If the field contains 11 and now it contains 111 where was the
@@ -20,10 +21,18 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
   const dayRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   console.log(`DateControl ${day}:${month}:${props.year}`);
   return (
-    <div>
+    <div
+      ref={containerRef}
+      onBlur={(e) => {
+        e.stopPropagation();
+        containerRef.current?.classList?.add("unfocussedBox");
+        containerRef.current?.classList?.remove("focussedBox");
+      }}
+    >
       <BorderlessInput
         width={2.1}
         type="number"
