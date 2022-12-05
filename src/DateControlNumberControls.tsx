@@ -35,6 +35,7 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
     >
       <BorderlessInput
         width={2.1}
+        className={"unfocussedBox"}
         type="number"
         ref={dayRef}
         value={day}
@@ -53,10 +54,15 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
 
           props.onChange("d", valueToWrite);
         }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
+        }}
       />
       /
       <BorderlessInput
         width={2.1}
+        className={"unfocussedBox"}
         type="number"
         ref={monthRef}
         value={month}
@@ -75,10 +81,15 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
 
           props.onChange("m", valueToWrite);
         }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
+        }}
       />
       /
       <BorderlessInput
         width={3.2}
+        className={"unfocussedBox"}
         type="number"
         ref={yearRef}
         value={year}
@@ -96,6 +107,10 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
           }
 
           props.onChange("y", valueToWrite);
+        }}
+        onFocus={(e) => {
+          containerRef.current?.classList?.remove("unfocussedBox");
+          containerRef.current?.classList?.add("focussedBox");
         }}
       />
     </div>
