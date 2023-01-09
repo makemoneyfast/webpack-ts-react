@@ -14,6 +14,8 @@ root.render(
   <div>
     <App />
     <NumberBasedApp />
+    <hr />
+    Numeric mode <input type="text" inputMode="numeric" />
   </div>
 );
 shout();

@@ -33,6 +33,9 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
         containerRef.current?.classList?.remove("focussedBox");
       }}
     >
+      <label htmlFor={`DD`} className="visually-hidden">
+        DD
+      </label>
       <BorderlessInput
         width={2.1}
         className={"unfocussedBox"}
@@ -42,6 +45,7 @@ export const DateControlWithNumbers = (props: IDateControlProps) => {
         pattern="[0-9]*"
         min="1"
         max="31"
+        id="DD"
         onChange={(e) => {
           let valueToWrite = e.target.value;
 
