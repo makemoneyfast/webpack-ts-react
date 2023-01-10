@@ -1,7 +1,7 @@
-import { makeLol } from "./lol";
+import { lulz } from "./example";
 
 describe("makeLOL", () => {
   test("normal scenario", () => {
-    expect(makeLol(2)).toBe("LOLLOL");
+    expect(lulz(2)).toBe("LOL!LOL!");
   });
 });

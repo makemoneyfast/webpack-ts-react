@@ -12,3 +12,6 @@ yarn.lock
 # Webpack
 build/
 dist/
+
+# Jest
+coverage
