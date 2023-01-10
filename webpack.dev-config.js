@@ -25,7 +25,7 @@ module.exports = {
   mode: "development",
   entry: {
     main: "./src/index.tsx",
-    shout: "./src/shouting.ts",
+    extra: "./src/extra.ts",
   },
   output: {
     filename: "[name]-[contenthash].js",
