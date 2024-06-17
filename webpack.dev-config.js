@@ -38,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Something something",
+      title: "Playpen",
     }),
     new WebpackManifestPlugin(manifestOptions),
   ],
