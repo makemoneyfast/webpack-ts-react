@@ -1,118 +1,133 @@
 import ReactDOM from "react-dom/client";
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 const element = document.createElement("div");
 document.body.appendChild(element);
 
-const number1 = 10;
-const number2 = 20;
-const number3 = 30;
-const number4 = 40;
-// Write a function that returns a number.
+const Container = () => {
+  // write a function that returns nothing, but sets the
+  // value of the local variable 'answer1' to a specific number.
 
-function aaa() {
-  return 1;
-}
+  let answer1: number;
 
-// Write a function that takes a single number and returns it unchanged
+  // write a function that returns nothing, but sets the
+  // value of the local variable 'answer2' to the value of its single
+  // string argument.
 
-function bbb(number: number) {
-  return number;
-}
+  let answer2: string;
 
-// Write a function that takes a single number and returns that number plus ten
+  // write a function that returns nothing, but sets the
+  // value of the local variable 'answer3' to the value of the
+  // local variable 'sourceValue3'.
 
-function ccc(number: number) {
-  return number + 10;
-}
+  const sourceValue3 = "source value 3";
+  let answer3: string;
 
-// Write a function that takes two numbers and returns the sum of the two
+  // write a function that returns nothing, but increments the local
+  // variable 'answer4' by 10. Update the arrow function clickHandler4
+  // to execute this function.
 
-function ddd(number1: number, number2: number) {
-  return number1 + number2;
-}
+  let answer4: string;
+  const clickHandler4: () => void = () => undefined;
 
-// Write a function that takes four numbers and returns the sum of first and last only
+  // write a function that returns nothing, but increments the local
+  // variable 'answer5' by 100. Update the arrow function
+  // incrementClickHandler5 to execute this function.
 
-function eee(
-  number1: number,
-  number2: number,
-  number3: number,
-  number4: number
-) {
-  return number1 + number4;
-}
+  // write another function that returns nothing, but decrements 'answer5'
+  // by 19. Update the arrow function decrementClickHandler5
+  // to execute this function.
 
-// Write a function that takes four numbers and returns an object, where the first property
-// is the sum of the first two numbers and the second property is the sum of the last two.
+  let answer5: string;
+  const incrementClickHandler5: () => void = () => undefined;
+  const decrementClickHandler5: () => void = () => undefined;
 
-function fff(
-  number1: number,
-  number2: number,
-  number3: number,
-  number4: number
-) {
-  return {
-    sumOne: number1 + number2,
-    sumTwo: number3 + number4,
-  };
-}
-// Write a function that returns a number.
-const arrow1: () => number = () => 1;
+  // write a function that takes a single function as an argument,
+  // and returns an object with two function properties
+  // called increment and decrement.
 
-// Write a function that takes a single number and returns it unchanged
-const aVariableIDefined = 999; // a variable
-const arrow2: (number: number) => number = () => aVariableIDefined; // takes no input, returns the variable defined above
-const arrow3: (number: number) => number = (inputNumber: number) => inputNumber; // takes an input and returns it
+  // but increments the local
+  // variable 'answer5' by 100. Update the arrow function
+  // incrementClickHandler5 to execute this function.
 
-// Write a function that takes a single number and returns that number plus ten
-const arrow4: (number: number) => number = (inputNumber: number) =>
-  inputNumber + 10;
+  // write another function that returns nothing, but decrements 'answer5'
+  // by 19. Update the arrow function decrementClickHandler5
+  // to execute this function.
 
-// Write a function that takes two numbers and returns the sum of the two
-const arrow5: (inputNumber1: number, inputNumber2: number) => number = (
-  inputNumber1: number,
-  inputNumber2: number
-) => inputNumber1 + inputNumber2;
+  // Call the function and set 'incrementClickHandler6' and
+  // 'decrementClickHandler6' to each call one of the two functions
+  // your function returns.
 
-// Write a function that takes four numbers and returns the sum of first and last only
-const arrow6: (a: number, b: number, c: number, d: number) => number = (
-  inputNumber1: number,
-  inputNumber2: number,
-  inputNumber3: number,
-  inputNumber4: number
-) => inputNumber1 + inputNumber4;
+  // define your function here
 
-// Write a function that takes four numbers and returns an object, where the first property
-// is the sum of the first two numbers and the second property is the sum of the last two.
-const arrow7: (
-  a: number,
-  b: number,
-  c: number,
-  d: number
-) => { sumOne: number; sumTwo: number } = (
-  inputNumber1: number,
-  inputNumber2: number,
-  inputNumber3: number,
-  inputNumber4: number
-) => ({
-  sumOne: inputNumber1 + inputNumber4,
-  sumTwo: inputNumber3 + inputNumber4,
-});
+  const [answer6, setAnswer6] = useState(10);
+  const callback6 = (newValue: number) => setAnswer6(newValue);
 
-const lala = () => {
-  return 12;
-}; // curly brackets define function body
-const lolo = () => ({ aNumericValue: 12 }); // curly brackets define an object
+  // call your function here
 
-const result = JSON.stringify(arrow7(1, 2, 3, 4));
+  const incrementClickHandler6: () => void = () => undefined;
+  const decrementClickHandler6: () => void = () => undefined;
+
+  return (
+    <div className="container">
+      <h3>Named functions</h3>
+      <h4>1. Set a single local variable value</h4>
+      <p>{answer1}</p>
+      <h4>2. Set a single local variable value to the argument value</h4>
+      <p>{answer2}</p>
+      <h4>3. Set a single local variable value to another local variable</h4>
+      <p>{answer3}</p>
+      <h4>
+        4. Increment a single local variable value, and bind this function to a
+        button click event
+      </h4>
+      <p>
+        <input type="button" onClick={clickHandler4} value="click me" />
+        {answer4}
+      </p>
+      <h4>
+        5. Write a function to increment a single local variable value, and bind
+        this function to a button click event. Write another function to
+        decrement the same variable, and bind that function to a different
+        button click event.
+      </h4>
+      <p>
+        <input
+          type="button"
+          onClick={incrementClickHandler5}
+          value="increment"
+        />
+        &nbsp; {answer5} &nbsp;
+        <input
+          type="button"
+          onClick={decrementClickHandler5}
+          value="decrement"
+        />
+      </p>
+      <h4>
+        6. Do the same, but encapsulate everything inside a single function.
+      </h4>
+      <p>
+        <input
+          type="button"
+          onClick={incrementClickHandler6}
+          value="increment"
+        />
+        &nbsp; {answer6} &nbsp;
+        <input
+          type="button"
+          onClick={decrementClickHandler6}
+          value="decrement"
+        />
+      </p>
+    </div>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getRootNode() as HTMLElement);
 root.render(
   <React.StrictMode>
-    <div className="container">
-      <h1>{result}</h1>
-    </div>
+    <Container />
   </React.StrictMode>
 );
