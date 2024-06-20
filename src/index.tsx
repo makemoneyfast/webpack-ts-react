@@ -2,8 +2,8 @@ import ReactDOM from "react-dom/client";
 import React, { useState } from "react";
 import "./style.css";
 
-const element = document.createElement("div");
-document.body.appendChild(element);
+// const element = document.createElement("div");
+// document.body.appendChild(element);
 
 const Container = () => {
   // write a function that returns nothing, but sets the
@@ -11,11 +11,23 @@ const Container = () => {
 
   let answer1: number;
 
+  function one() {
+    answer1 = 1
+  };
+  one();
+  console.log('this is answer1', answer1);
+
   // write a function that returns nothing, but sets the
   // value of the local variable 'answer2' to the value of its single
   // string argument.
 
   let answer2: string;
+
+  function two(answer: string) {
+    answer2 = answer
+  };
+  two('hello');
+  console.log('this is answer2', answer2);
 
   // write a function that returns nothing, but sets the
   // value of the local variable 'answer3' to the value of the
@@ -24,12 +36,24 @@ const Container = () => {
   const sourceValue3 = "source value 3";
   let answer3: string;
 
+  function three() {
+    answer3 = sourceValue3
+  };
+  three();
+  console.log('this is answer3', answer3);
+
   // write a function that returns nothing, but increments the local
   // variable 'answer4' by 10. Update the arrow function clickHandler4
   // to execute this function.
 
-  let answer4: string;
-  const clickHandler4: () => void = () => undefined;
+  let answer4 = 10;
+  function four() {
+    answer4 = answer4 + 10;
+  };
+  const clickHandler4: () => void = () => 
+    four();
+
+  console.log('this is answer4', answer4);
 
   // write a function that returns nothing, but increments the local
   // variable 'answer5' by 100. Update the arrow function
@@ -39,9 +63,18 @@ const Container = () => {
   // by 19. Update the arrow function decrementClickHandler5
   // to execute this function.
 
-  let answer5: string;
-  const incrementClickHandler5: () => void = () => undefined;
-  const decrementClickHandler5: () => void = () => undefined;
+  let answer5 = 50;
+  function five() {
+    answer5 = answer5 + 10;
+  };
+  const incrementClickHandler5: () => void = () => 
+    five();
+  
+  function six() {
+    answer5 = answer5 - 19;
+  }; 
+  const decrementClickHandler5: () => void = () => 
+    six();
 
   // write a function that takes a single function as an argument,
   // and returns an object with two function properties
@@ -61,13 +94,29 @@ const Container = () => {
 
   // define your function here
 
+  function seven(lala: (newValue: number) => void) {
+    let internal = 10;
+    return{
+      increment: () => {
+        internal = internal + 1;
+        lala(internal);
+      },
+      decrement: () => {
+        internal = internal - 1;
+        lala(internal);
+      }
+    }
+  };
+
   const [answer6, setAnswer6] = useState(10);
   const callback6 = (newValue: number) => setAnswer6(newValue);
 
   // call your function here
-
-  const incrementClickHandler6: () => void = () => undefined;
-  const decrementClickHandler6: () => void = () => undefined;
+  const lolo = seven(callback6);
+  const incrementClickHandler6: () => void = () => 
+    lolo.increment();
+  const decrementClickHandler6: () => void = () =>
+    lolo.decrement();
 
   return (
     <div className="container">
