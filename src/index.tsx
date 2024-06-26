@@ -10,7 +10,11 @@ const Container = () => {
   // Define a function called 'one' that it returns the number it receives as an argument or
   // the number 49, whichever is larger.
 
-  const click1 = () => undefined as any; // () => setAnswer1(one(input1));
+  function one(number: number) {
+    return Math.max(number, 49);
+  }
+
+  const click1 = () => setAnswer1(one(input1));
 
   // 2.
   const [input2, setInput2] = useState(0);
@@ -19,7 +23,11 @@ const Container = () => {
   // Define a function called 'two' that returns the number it receives as an argument or the
   // number 512, whichever is smaller.
 
-  const click2 = () => undefined as any; // () => setAnswer2(two(input2));
+  function two(number: number) {
+    return Math.min(number, 512);
+  }
+
+  const click2 = () => setAnswer2(two(input2));
 
   // 3.
   const [input3a, setInput3a] = useState(0);
@@ -29,7 +37,11 @@ const Container = () => {
   // Define a function called 'three' that it returns the largest of the two numbers it receives as
   // arguments.
 
-  const click3 = () => undefined as any; // () => setAnswer3(three(input3a, input3b));
+  function three(a: number, b: number) {
+    return Math.max(a, b);
+  }
+
+  const click3 = () => setAnswer3(three(input3a, input3b));
 
   // 4.
   const [input4a, setInput4a] = useState(0);
@@ -39,7 +51,11 @@ const Container = () => {
   // Define a function called 'four' that it returns the smallest of the two numbers it receives
   // as arguments.
 
-  const click4 = () => undefined as any; // () => setAnswer4(four(input4a, input4b));
+  function four(a: number, b: number) {
+    return Math.min(a, b);
+  }
+
+  const click4 = () => setAnswer4(four(input4a, input4b));
   // 5.
   const [input5, setInput5] = useState(0);
   const [answer5, setAnswer5] = useState(0);
@@ -47,15 +63,27 @@ const Container = () => {
   // Define a function called 'five' that it randomly returns either 1 (75% of the time) or -1
   // (25% of the time).
 
-  const click5 = () => undefined as any; // () => setAnswer5(five(input5));
+  function five() {
+    if(Math.random() > 0.25) {
+      return 1
+    } else {
+      return -1;
+    }
+  }
+
+  const click5 = () => setAnswer5(five());
   // 6.
   const [input6, setInput6] = useState("");
-  const [answer6, setAnswer6] = useState("");
+  const [answer6, setAnswer6] = useState(0);
 
   // Define a function called 'six' that it returns the number of times the lowercase letter e
   // appears in the string it receives as an argument.
 
-  const click6 = () => undefined as any; // () => setAnswer6(six(input6));
+  function six(str: string) {
+    return (str.match(/e/gi)||[]).length;
+  }
+
+  const click6 = () => setAnswer6(six(input6));
   // 7.
   const [input7, setInput7] = useState("");
   const [answer7, setAnswer7] = useState("");
@@ -63,7 +91,12 @@ const Container = () => {
   // Define a function called 'seven' that it returns the string it receives as an argument, but
   // with the first three characters and last three characters removed.
 
-  const click7 = () => undefined as any; // () => setAnswer7(seven(input7));
+  function seven(str: string) {
+    const stepOne = str.slice(3);
+    return stepOne.slice(0,-3);
+  }
+
+  const click7 = () => setAnswer7(seven(input7));
   // 8.
   const [input8, setInput8] = useState("");
   const [answer8, setAnswer8] = useState("");
@@ -72,16 +105,34 @@ const Container = () => {
   // words at whitespace boundaries, and returns one word chosen at random,
   // repeated a random number of times from 1 to 10
 
-  const click8 = () => undefined as any; // () => setAnswer8(eight(input8));
+  function eight(str: string) {
+    const stepOne = str.split(/\s+/);
+    const stepTwo = stepOne[Math.floor(Math.random() * stepOne.length)];
+    const repeats = Math.floor(Math.random() * 10) + 1;
+    return stepTwo.repeat(repeats);
+  }
+
+  const click8 = () => setAnswer8(eight(input8));
   // 9.
   const [input9, setInput9] = useState("");
+  const [input9a, setInput9a] = useState(0);
   const [answer9, setAnswer9] = useState("");
 
   // Define a function called 'nine' that takes a string argument and a number.
   // The function should return all the nth characters of the string, where n is
   // the value of the number argument.
 
-  const click9 = () => undefined as any; // () => setAnswer9(nine(input9));
+  function nine(str: string, num: number) {
+    let answer = ''
+    for ( let i = num - 1; i < str.length; i = i + num) {
+      console.log("i is:", i)
+      answer = answer + str[i]
+      console.log(answer)
+    }
+    return answer
+  }
+
+  const click9 = () => setAnswer9(nine(input9, input9a));
   return (
     <div className="container">
       <h3>Math and logic</h3>
@@ -218,6 +269,11 @@ const Container = () => {
           type="text"
           value={input9}
           onChange={(e) => setInput9(e.target.value)}
+        />{" "}
+        <input
+          type="text"
+          value={input9a}
+          onChange={(e) => setInput9a(parseInt(e.target.value))}
         />{" "}
         &nbsp;
         <input type="button" onClick={click9} value="execute" /> &nbsp;
