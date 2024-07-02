@@ -11,7 +11,8 @@ const Container = () => {
   console.log("* - ".repeat(10));
 
   console.log(
-    "Write a function that takes an array of numbers and returns an array of the same length where every entry is eqiuvalent to the source array value plus 6.", one()
+    "Write a function that takes an array of numbers and returns an array of the same length where every entry is eqiuvalent to the source array value plus 6.",
+    one()
   );
 
   function one() {
@@ -19,7 +20,8 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns a new array containing the same numbers with any fractional quantities removed.", two()
+    "Write a function that takes an array of numbers and returns a new array containing the same numbers with any fractional quantities removed.",
+    two()
   );
 
   function two() {
@@ -27,7 +29,8 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns a new array containing only the fractional quantities of the input numbers.", three()
+    "Write a function that takes an array of numbers and returns a new array containing only the fractional quantities of the input numbers.",
+    three()
   );
 
   function three() {
@@ -35,7 +38,8 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns a new array of the same numbers in decreasing order", four()
+    "Write a function that takes an array of numbers and returns a new array of the same numbers in decreasing order",
+    four()
   );
 
   function four() {
@@ -43,15 +47,19 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns a new array of the same numbers in decreasing order of absolute value", five()
+    "Write a function that takes an array of numbers and returns a new array of the same numbers in decreasing order of absolute value",
+    five()
   );
 
   function five() {
-    return [...sourceArray1].sort((a: number, b: number) => Math.abs(b) - Math.abs(a));
+    return [...sourceArray1].sort(
+      (a: number, b: number) => Math.abs(b) - Math.abs(a)
+    );
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns a new array of the same numbers as strings", six()
+    "Write a function that takes an array of numbers and returns a new array of the same numbers as strings",
+    six()
   );
 
   function six() {
@@ -59,15 +67,17 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns an array of boolean values (true for fractional numbers, false for integers", seven()
+    "Write a function that takes an array of numbers and returns an array of boolean values (true for fractional numbers, false for integers",
+    seven()
   );
-  
+
   function seven() {
-    return sourceArray1.map((x) => x % 1 !== 0 );
+    return sourceArray1.map((x) => x % 1 !== 0);
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns the sum of all numbers in the array", eight()
+    "Write a function that takes an array of numbers and returns the sum of all numbers in the array",
+    eight()
   );
 
   function eight() {
@@ -75,15 +85,24 @@ const Container = () => {
   }
 
   console.log(
-    "Write a function that takes an array of numbers and returns the sum of all the even-numbered entries in the array", nine()
+    "Write a function that takes an array of numbers and returns the sum of all the even-numbered entries in the array",
+    nine()
   );
 
   function nine() {
-    return sourceArray1.reduce((accumulator, x, i) => i % 2 !== 0 ? accumulator + x : accumulator, 0);
+    return sourceArray1.reduce(
+      (accumulator, x, i) => (i % 2 !== 0 ? accumulator + x : accumulator),
+      0
+    );
   }
-
   console.log(
-    "Write a function that takes an array of numbers and returns the sum of all the even-numbered entries in the array"
+    "Write a function that takes a string and returns the same string but with every instance of the word 'the' removed"
+  );
+  console.log(
+    "Write a function that takes a string and returns a string with the same text except that the words are in reverse order"
+  );
+  console.log(
+    "Write a function that takes a string and returns a string with the same text except that the letters in each word are in reverse order"
   );
   return (
     <div className="container">
