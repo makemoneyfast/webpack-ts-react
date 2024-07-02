@@ -98,12 +98,40 @@ const Container = () => {
   console.log(
     "Write a function that takes a string and returns the same string but with every instance of the word 'the' removed"
   );
+
+  const testString = "the hello to the world"
+  function ten(str: string) {
+    const stepOne = str.split(" ");
+    const stepTwo = stepOne.filter((word) => word !== 'the')
+    return stepTwo.join(" ")
+  }
+
+  console.log("question ten:", ten(testString));
+
   console.log(
-    "Write a function that takes a string and returns a string with the same text except that the words are in reverse order"
+    "Write a function that takes a string and returns a string with the same text except that the words are in reverse order:", eleven(testString)
   );
+
+  function eleven(str: string) {
+    const stepOne = str.split(" ");
+    const stepTwo = stepOne.reverse();
+    return stepTwo.join(" ") // procedural
+  }
+
+  function elevenA(str: string) {
+    return str.split(" ").reverse().join(" ")
+  }
+
+console.log("question 11a:", elevenA(testString));
+
   console.log(
-    "Write a function that takes a string and returns a string with the same text except that the letters in each word are in reverse order"
+    "Write a function that takes a string and returns a string with the same text except that the letters in each word are in reverse order:", twelve(testString)
   );
+
+  function twelve(str: string) {
+    return str.split(" ").map(x => x.split("").reverse().join("")).join(" "); //declarative
+  }
+
   return (
     <div className="container">
       <h3>Arrays</h3>
