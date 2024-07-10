@@ -39,6 +39,12 @@ enum foods {
   sandwiches,
   wraps,
 }
+interface profile {
+  name: string;
+  leSserafimBias: leSserafimTeamMemberNames;
+  spotifySubscription: boolean;
+  favouriteFood: foods[];
+}
 
 const Container = () => {
   const starLordTeamMembers = [
@@ -119,6 +125,11 @@ const Container = () => {
     },
   ];
 
+  interface fooditems {
+    food: foods;
+    stars: number;
+  }
+
   const foodHealthStarRatings = [
     { food: foods.pringles, stars: 1 },
     { food: foods.onigiri, stars: 4 },
@@ -155,13 +166,38 @@ const Container = () => {
 
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
-    new array of team members sorted by the number of instagram posts made by their Le Sserafim bias.`
+    new array of team members sorted by the number of instagram posts made by their Le Sserafim bias.`, One(starLordTeamMembers)
   );
+
+  function One(starLordTeamMembers: profile[]) {
+    return starLordTeamMembers.sort((a: profile, b: profile) => {
+      const aBias = a.leSserafimBias 
+      const aBiasName = leSserafimMembers.find((element) => element.name == aBias)
+      const aInsta = aBiasName.instagramPostCount
+      const bBias = b.leSserafimBias 
+      const bBiasName = leSserafimMembers.find((element) => element.name == bBias)
+      const bInsta = bBiasName.instagramPostCount
+    return bInsta - aInsta;
+    })
+  }
 
   console.log(
     `Write a function that takes a list of food items and returns a new array with all all items not 
     liked by at least one member of Le Sserafim removed, sorted in order of decreasing health star rating.`
   );
+
+  function Two(foodsToSort: fooditems[]) {
+    const likedFoods = foodsToSort.filter((food) => {
+    // get all the members
+    // for each member in turn, get the list of foods for that member
+    // for each food in the list, compare it to the food we're evaluating
+    // if food matches, return true
+    // else return false
+      // let checkFood = leSserafimMembers.some()
+      
+
+    })
+  }
 
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
@@ -169,6 +205,13 @@ const Container = () => {
     The array of favourite foods should be modified to contain full descriptions of the foods including 
     health star ratings.`
   );
+  // get all the starlord members
+  // check whether each members spotify subscription is true or false
+  // if true, keep them in the list,
+  // if false, filter them out
+  // for each of the remaining members:
+  // get their array of favourite foods
+  // look at the each food's description (health star rating) and add it into the favourite foods part of the member profile
 
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
