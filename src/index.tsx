@@ -186,8 +186,8 @@ const Container = () => {
     liked by at least one member of Le Sserafim removed, sorted in order of decreasing health star rating.`
   );
 
-  function Two(foodsToSort: fooditems[]) {
-    const likedFoods = foodsToSort.filter((food) => {
+  // function Two(foodsToSort: fooditems[]) {
+  //   const likedFoods = foodsToSort.filter((food) => {
     // get all the members
     // for each member in turn, get the list of foods for that member
     // for each food in the list, compare it to the food we're evaluating
@@ -196,23 +196,37 @@ const Container = () => {
       // let checkFood = leSserafimMembers.some()
       
 
-    })
-  }
+  //   })
+  // }
 
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
     new array of team member objects with all members who lack a spotify subscription filtered out.
     The array of favourite foods should be modified to contain full descriptions of the foods including 
-    health star ratings.`
+    health star ratings.`, Three(starLordTeamMembers)
   );
+  function Three(allMembers: profile[]) {
   // get all the starlord members
   // check whether each members spotify subscription is true or false
   // if true, keep them in the list,
-  // if false, filter them out
+  // if false, filter them out 
+  const membersWithSubscriptions = allMembers.filter((member) => member.spotifySubscription === true);
+  console.log("memberswithsubscriptions", membersWithSubscriptions);
+  const modifiedMembers = membersWithSubscriptions.map((member) => {
+    member.favouriteFood = member.favouriteFood.map((afoods) => { 
+      const foodWithStars = foodHealthStarRatings[afoods];
+      console.log(foods[afoods]);
+      return {
+        food: foods[afoods], stars: foodWithStars.stars
+      }
+    }) as unknown as any;
+    console.log("member fav food", member.favouriteFood);
+     return member});
+  return modifiedMembers
   // for each of the remaining members:
   // get their array of favourite foods
   // look at the each food's description (health star rating) and add it into the favourite foods part of the member profile
-
+  }
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
     new array of objects that contain the only team member name and a list of favourite foods
