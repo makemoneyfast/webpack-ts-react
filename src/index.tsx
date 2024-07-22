@@ -243,6 +243,14 @@ const Container = () => {
     `Write a function that takes a list of food items and filters out all items not liked by at least one
     member of Le Sserafim.`
   );
+
+  console.log(
+    `Write a function that takes the foodHealthStarRatings array as an argument and returns an array of starLordTeamMembers 
+    who have favourite foods with a health star rating of three and order them in order of the sum of their 
+    lesserafim bias' favourite food health stars ratings.
+  );
+
+
   console.log("* - ".repeat(10));
   return (
     <div className="container">
