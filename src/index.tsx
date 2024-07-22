@@ -164,21 +164,26 @@ const Container = () => {
   console.log("Arrays 2");
   console.log("* - ".repeat(10));
 
-  console.log(
-    `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
-    new array of team members sorted by the number of instagram posts made by their Le Sserafim bias.`, One(starLordTeamMembers)
-  );
+  // console.log(
+  //   `Write a function that takes the StarLordTeamMembers array as an argument and returns a
+  //   new array of team members sorted by the number of instagram posts made by their Le Sserafim bias.`,
+  //   One(starLordTeamMembers)
+  // );
 
   function One(starLordTeamMembers: profile[]) {
     return starLordTeamMembers.sort((a: profile, b: profile) => {
-      const aBias = a.leSserafimBias 
-      const aBiasName = leSserafimMembers.find((element) => element.name == aBias)
-      const aInsta = aBiasName.instagramPostCount
-      const bBias = b.leSserafimBias 
-      const bBiasName = leSserafimMembers.find((element) => element.name == bBias)
-      const bInsta = bBiasName.instagramPostCount
-    return bInsta - aInsta;
-    })
+      const aBias = a.leSserafimBias;
+      const aBiasName = leSserafimMembers.find(
+        (element) => element.name == aBias
+      );
+      const aInsta = aBiasName.instagramPostCount;
+      const bBias = b.leSserafimBias;
+      const bBiasName = leSserafimMembers.find(
+        (element) => element.name == bBias
+      );
+      const bInsta = bBiasName.instagramPostCount;
+      return bInsta - aInsta;
+    });
   }
 
   console.log(
@@ -188,44 +193,48 @@ const Container = () => {
 
   // function Two(foodsToSort: fooditems[]) {
   //   const likedFoods = foodsToSort.filter((food) => {
-    // get all the members
-    // for each member in turn, get the list of foods for that member
-    // for each food in the list, compare it to the food we're evaluating
-    // if food matches, return true
-    // else return false
-      // let checkFood = leSserafimMembers.some()
-      
+  // get all the members
+  // for each member in turn, get the list of foods for that member
+  // for each food in the list, compare it to the food we're evaluating
+  // if food matches, return true
+  // else return false
+  // let checkFood = leSserafimMembers.some()
 
   //   })
   // }
 
-  console.log(
-    `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
-    new array of team member objects with all members who lack a spotify subscription filtered out.
-    The array of favourite foods should be modified to contain full descriptions of the foods including 
-    health star ratings.`, Three(starLordTeamMembers)
-  );
+  // console.log(
+  //   `Write a function that takes the StarLordTeamMembers array as an argument and returns a
+  //   new array of team member objects with all members who lack a spotify subscription filtered out.
+  //   The array of favourite foods should be modified to contain full descriptions of the foods including
+  //   health star ratings.`,
+  //   Three(starLordTeamMembers)
+  // );
   function Three(allMembers: profile[]) {
-  // get all the starlord members
-  // check whether each members spotify subscription is true or false
-  // if true, keep them in the list,
-  // if false, filter them out 
-  const membersWithSubscriptions = allMembers.filter((member) => member.spotifySubscription === true);
-  console.log("memberswithsubscriptions", membersWithSubscriptions);
-  const modifiedMembers = membersWithSubscriptions.map((member) => {
-    member.favouriteFood = member.favouriteFood.map((afoods) => { 
-      const foodWithStars = foodHealthStarRatings[afoods];
-      console.log(foods[afoods]);
-      return {
-        food: foods[afoods], stars: foodWithStars.stars
-      }
-    }) as unknown as any;
-    console.log("member fav food", member.favouriteFood);
-     return member});
-  return modifiedMembers
-  // for each of the remaining members:
-  // get their array of favourite foods
-  // look at the each food's description (health star rating) and add it into the favourite foods part of the member profile
+    // get all the starlord members
+    // check whether each members spotify subscription is true or false
+    // if true, keep them in the list,
+    // if false, filter them out
+    const membersWithSubscriptions = allMembers.filter(
+      (member) => member.spotifySubscription === true
+    );
+    console.log("memberswithsubscriptions", membersWithSubscriptions);
+    const modifiedMembers = membersWithSubscriptions.map((member) => {
+      member.favouriteFood = member.favouriteFood.map((afoods) => {
+        const foodWithStars = foodHealthStarRatings[afoods];
+        console.log(foods[afoods]);
+        return {
+          food: foods[afoods],
+          stars: foodWithStars.stars,
+        };
+      }) as unknown as any;
+      console.log("member fav food", member.favouriteFood);
+      return member;
+    });
+    return modifiedMembers;
+    // for each of the remaining members:
+    // get their array of favourite foods
+    // look at the each food's description (health star rating) and add it into the favourite foods part of the member profile
   }
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
@@ -247,9 +256,73 @@ const Container = () => {
   console.log(
     `Write a function that takes the foodHealthStarRatings array as an argument and returns an array of starLordTeamMembers 
     who have favourite foods with a health star rating of three and order them in order of the sum of their 
-    lesserafim bias' favourite food health stars ratings.
+    lesserafim bias' favourite food health stars ratings.`
   );
 
+  console.log("what is going on. I have to write a function.");
+
+  const aFunction: (input: fooditems[]) => profile[] = (input: fooditems[]) => {
+    console.log("I am a function this is my input", input);
+
+    console.log("I need to return an array. ");
+    console.log("I have to return the starlord team members changed a bit");
+    console.log(
+      "I have to delete every team member who doesn't ahve a food favourite with three stars.."
+    );
+
+    const theTeamMembers = starLordTeamMembers;
+    console.log("gonna try filtering this list", theTeamMembers);
+    const theFilteredTeamMembers = theTeamMembers.filter((member) => {
+      // console.log(
+      //   "here we are inside the filter function, this is what we ahve to play with",
+      //   member
+      // );
+      // console.log(
+      //   "I have to eliminate this team member if they don't have a three star food item"
+      // );
+      // console.log(
+      //   "🥨 this is what's in the food items array",
+      //   member.favouriteFood
+      // );
+      // console.log(
+      //   "I can't work with these as they are. Going to map to get something useful hopefully"
+      // );
+      const hopefullyUsefulRemappedFoods = member.favouriteFood.map(
+        (itemToRemap) =>
+          foodHealthStarRatings.find((item) => item.food === itemToRemap)
+      );
+      // console.log(
+      //   "🌏 done mapping, this is what we got",
+      //   hopefullyUsefulRemappedFoods
+      // );
+      // console.log(
+      //   "Is there a three star item in this list? Going to try find again."
+      // );
+      const searchedForThreeStarItem = hopefullyUsefulRemappedFoods.find(
+        (item) => {
+          //console.log("⭐ We are examining this, is it three stars", item);
+          const isItThreeStars = item.stars === 3;
+          //console.log("🌟 is it three stars?", isItThreeStars);
+          return isItThreeStars;
+        }
+      );
+      console.log(
+        "💀 we searched for three star items and we got",
+        searchedForThreeStarItem
+      );
+
+      const returnValue = searchedForThreeStarItem !== undefined;
+      console.log("I am returning", returnValue);
+      return returnValue;
+    });
+    console.log("the filtered team members", theFilteredTeamMembers);
+
+    return theFilteredTeamMembers; // this is wrong but baby steps
+  };
+
+  const theResult = aFunction(foodHealthStarRatings); // call the function and save what we get back
+
+  console.log("Here is what my function return:", theResult);
 
   console.log("* - ".repeat(10));
   return (
