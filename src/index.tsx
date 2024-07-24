@@ -236,6 +236,44 @@ const Container = () => {
     // get their array of favourite foods
     // look at the each food's description (health star rating) and add it into the favourite foods part of the member profile
   }
+
+  // Cheat notes:
+
+  // These are test functions - they say yes or no to something:
+
+  const isBiggerThanFive = (x: number) => x > 5;
+  const hasAtLeastFourItems = (list: number[]) => list.length >= 4;
+  const isEven = (x: number) => x % 2 === 0;
+
+  // With a test, you can filter a list (just tell it what to keep in or leave out)
+
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const filteredNumbers = numbers.filter(isBiggerThanFive);
+  console.log("filtered numbers", filteredNumbers);
+
+  // You can look for things in it.
+
+  const firstNumberBiggerThanFive = numbers.find(isBiggerThanFive);
+  console.log("first number bigger than five", firstNumberBiggerThanFive);
+
+  // You can just see if the list contains something or not
+
+  const hasANumberBiggerThanFive = numbers.some(isBiggerThanFive);
+  console.log(
+    "does it have a number bigger than five?",
+    hasANumberBiggerThanFive
+  );
+
+  // This is a conversion function - it takes in one thing and returns something else
+
+  const makeSandwich = (filling: string) => `Here is your ${filling} sandwich`;
+
+  // You can map over a list and convert each item in it
+
+  const ingredients = ["ham", "cheese", "pickle", "mayo"];
+  const sandwiches = ingredients.map(makeSandwich);
+  console.log("this is hopefully a list of sandwiches", sandwiches);
+
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
     new array of objects that contain the only team member name and a list of favourite foods
