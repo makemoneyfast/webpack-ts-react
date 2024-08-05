@@ -46,6 +46,12 @@ interface profile {
   favouriteFood: foods[];
 }
 
+interface LSprofile {
+  name: leSserafimTeamMemberNames;
+  favouriteFood: foods[];
+  instagramPostCount: number;
+}
+
 const Container = () => {
   const starLordTeamMembers = [
     {
@@ -245,16 +251,29 @@ const Container = () => {
   const hasAtLeastFourItems = (list: number[]) => list.length >= 4;
   const isEven = (x: number) => x % 2 === 0;
 
+  const hasVowel = (input: string) => {
+    const testValue = input.search(/[aeiou]/gi)
+    return testValue !== -1
+  }
+
+  console.log("hasVowel:", hasVowel('qwrtypsesad'));
   // With a test, you can filter a list (just tell it what to keep in or leave out)
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const filteredNumbers = numbers.filter(isBiggerThanFive);
   console.log("filtered numbers", filteredNumbers);
 
+  const strings = ['hello', 'no', 'thnks', 'hi', 'by', 'goodbye']
+  const filteredStrings = strings.filter(hasVowel);
+  console.log("filtered string:", filteredStrings);
+
   // You can look for things in it.
 
   const firstNumberBiggerThanFive = numbers.find(isBiggerThanFive);
   console.log("first number bigger than five", firstNumberBiggerThanFive);
+
+  const firstVowelfulString = strings.find(hasVowel);
+  console.log("first string with vowel:", firstVowelfulString);
 
   // You can just see if the list contains something or not
 
@@ -264,9 +283,14 @@ const Container = () => {
     hasANumberBiggerThanFive
   );
 
+  const hasAVowelfulString = strings.some(hasVowel);
+  console.log("does it have a vowel", hasAVowelfulString);
+
   // This is a conversion function - it takes in one thing and returns something else
 
   const makeSandwich = (filling: string) => `Here is your ${filling} sandwich`;
+
+  const makeSentence = (moods: string) => `I feel ${moods.repeat(5)}`;
 
   // You can map over a list and convert each item in it
 
@@ -274,12 +298,20 @@ const Container = () => {
   const sandwiches = ingredients.map(makeSandwich);
   console.log("this is hopefully a list of sandwiches", sandwiches);
 
+  const sentence = ingredients.map(makeSentence);
+  console.log("this is hopefully a list of sentences", sentence);
+
+
   console.log(
     `Write a function that takes the StarLordTeamMembers array as an argument and returns a 
-    new array of objects that contain the only team member name and a list of favourite foods
+    new array of objects that contain only: the team member name and a list of favourite foods
     that combines their own preferences with those of their favourite Le Sserafim member, with
     duplicates removed.`
   );
+
+
+
+
 
   console.log(
     `Write a function that does what the previous question does, but that also adds a property containing
@@ -290,6 +322,10 @@ const Container = () => {
     `Write a function that takes a list of food items and filters out all items not liked by at least one
     member of Le Sserafim.`
   );
+
+  const likedFoods = (x: foods) => x
+  const doesThisLSMlikeSomeFood = (foodToMatch: foods, member: LSprofile) => member.favouriteFood.some(favouriteFood => favouriteFood === foodToMatch)
+  console.log("does this LSM like this food", doesThisLSMlikeSomeFood(foods.ramen, leSserafimMembers[0]));
 
   console.log(
     `Write a function that takes the foodHealthStarRatings array as an argument and returns an array of starLordTeamMembers 
@@ -358,9 +394,9 @@ const Container = () => {
     return theFilteredTeamMembers; // this is wrong but baby steps
   };
 
-  const theResult = aFunction(foodHealthStarRatings); // call the function and save what we get back
+  // const theResult = aFunction(foodHealthStarRatings); // call the function and save what we get back
 
-  console.log("Here is what my function return:", theResult);
+  // console.log("Here is what my function return:", theResult);
 
   console.log("* - ".repeat(10));
   return (
