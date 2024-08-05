@@ -46,12 +46,6 @@ interface profile {
   favouriteFood: foods[];
 }
 
-interface LSprofile {
-  name: leSserafimTeamMemberNames;
-  favouriteFood: foods[];
-  instagramPostCount: number;
-}
-
 const Container = () => {
   const starLordTeamMembers = [
     {
@@ -167,6 +161,7 @@ const Container = () => {
     { food: foods.wraps, stars: 4 },
   ];
 
+  console.log("Arrays 2");
   console.log("* - ".repeat(10));
 
   // console.log(
