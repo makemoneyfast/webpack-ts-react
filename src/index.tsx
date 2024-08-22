@@ -173,34 +173,53 @@ const Container = () => {
   const one = () => "output";
 
   const two = (input: string) => input;
+  console.log("two:", two('two'));
 
   const three = (inputValue: string) => input;
+  console.log("three:", three('input'));
 
   const four = (input: string) => output;
+  console.log("four:", four('four'));
 
+  console.log("output start", output);
   const five = (input: string) => (output = input);
+  console.log("five:", five('five'));
+  console.log("output end", output);
 
+  console.log("output start2:", output);
   const six = (input: string) => {
     output = input;
     return "rising";
   };
+  console.log("six:", six('six'));
+  console.log("output end2", output);
 
+
+  console.log("output start7:", input);
   const seven = (input: string) => {
     input = "girls never die";
     return output;
   };
+  console.log("seven:", seven("seven"));
+  console.log("output end7:", input, output);
 
+  console.log("output start8:", input);
   const eight = (input: string, output: string) => {
     output = input;
     output = output.toUpperCase();
     return output;
   };
+  console.log("eight", eight('hello', 'goodbye'));
+  console.log("output end8:", input, output);
 
   const nine = (input: string, callback: (input: string) => string) => {
     let output = callback(input);
+    console.log("here", output);
     output = output.toUpperCase();
     return output;
   };
+  console.log("nine:", nine("hello", two))
+
 
   const ten = (input: string) => {
     let output = input;
@@ -208,6 +227,11 @@ const Container = () => {
     const set = (input: string) => (output = input);
     return { get, set };
   };
+  const lala = ten('apple');
+  const lolo = ten('pear');
+  // console.log("ten", ten("apple"), lala.set('watermelon'));
+  console.log(lala.get(), lala.set('watermelon'), lala.get())
+
 
   const eleven = () => {
     const get = () => output;
