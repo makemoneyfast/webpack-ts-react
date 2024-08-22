@@ -1,5 +1,4 @@
 import { lulz } from "./example";
-import { six } from "./things";
 
 describe("makeLOL", () => {
   test("normal scenario", () => {
