@@ -24,10 +24,10 @@ const embassy = () => {
 
     let dinnerTime = "1200";
 
-    const diplomat = (b: string, l: string, d: string) => {
-      console.log(`Breakfast is ${breakfast.food} at ${b}`);
-      console.log(`Lunch is ${breakfast.food} at ${l}`);
-      console.log(`Dinner is ${dinner.food} at ${d}`);
+    const diplomat = (breakfast: string, lunch: string, dinner: string) => {
+      console.log(`Breakfast is ${breakfast.food} at ${breakfast}`);
+      console.log(`Lunch is ${breakfast.food} at ${lunch}`);
+      console.log(`Dinner is ${dinner.food} at ${dinner}`);
     };
 
     setTimeout(() => diplomat(breakfastTime, lunchTime, dinnerTime));
