@@ -14,6 +14,7 @@ const root = createRoot(domNode[0]);
 root.render(<Container />);
 
 const getARandomNumberSynchronously = () => {
+  console.log("#1 generating random number now");
   const randomNumber = Math.random();
 
   return randomNumber;
@@ -22,7 +23,10 @@ const getARandomNumberSynchronously = () => {
 const getARandomNumberAsynchronously = () => {
   let randomNumber: number;
 
-  setTimeout(() => (randomNumber = Math.random()), 1000);
+  setTimeout(() => {
+    console.log("#2 generating random number now");
+    randomNumber = Math.random();
+  }, 1000);
 
   return randomNumber;
 };
