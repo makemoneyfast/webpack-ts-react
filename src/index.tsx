@@ -1,60 +1,31 @@
 import { createRoot } from "react-dom/client";
-import React, { useState } from "react";
 import "./style.css";
 
-const breakfast = {
-  food: "ancient grains with organic yoghurt and artisanal fruit selection",
+const Container = () => {
+  return (
+    <div className="container">
+      <h3>Asynchronous functions</h3>
+      <p>Open dev tools.</p>
+    </div>
+  );
+};
+const domNode = document.getElementsByTagName("body");
+const root = createRoot(domNode[0]);
+root.render(<Container />);
+
+const getARandomNumberSynchronously = () => {
+  const randomNumber = Math.random();
+
+  return randomNumber;
 };
 
-let breakfastTime = "0900";
+const getARandomNumberAsynchronously = () => {
+  let randomNumber: number;
 
-const embassy = () => {
-  const lunch = {
-    food: "a selection of locally-sourced charcuterie",
-  };
+  setTimeout(() => (randomNumber = Math.random()), 1000);
 
-  let lunchTime = "1200";
-
-  const bedroom = () => {
-    let dinnerTime = "1200";
-
-    const dinner = {
-      food: "vegetarian lasagna from a farm",
-    };
-
-    // const theAssasin = (thePoison: string) => {
-    //   dinner.food = thePoison;
-    //   }
-    //   theAssasin("Maccas fries");
-
-    const diplomat = (b: string, l: string, d: string) => {
-      console.log(`Breakfast is ${breakfast.food} at ${b}`);
-      console.log(`Lunch is ${lunch.food} at ${l}`);
-      console.log(`Dinner is ${dinner.food} at ${d}`);
-    };
-
-    setTimeout(() => diplomat(breakfastTime, lunchTime, dinnerTime));
-
-    return {diplomat, dinner, dinnerTime};
-  };
-  let {diplomat, dinner, dinnerTime} = bedroom()
-
-
-  const theAssasin = (thePoison: string) => {
-    dinnerTime = "1900";
-    }
-    theAssasin("Maccas fries");
-
-  return diplomat;
+  return randomNumber;
 };
 
-console.log("hi");
-
-const theDiplomat = embassy();
-
-theDiplomat("0900", "1200", "1800");
-
-// const theAssasin = (thePoison: string) => {
-// breakfast.food = thePoison;
-// }
-// theAssasin("Maccas fries");
+console.log("Synchronously", getARandomNumberSynchronously());
+console.log("Asynchronously", getARandomNumberAsynchronously());
