@@ -19,10 +19,13 @@ const embassy = () => {
     let dinnerTime = "1200";
 
     const dinner = {
-      food: "",
+      food: "vegetarian lasagna from a farm",
     };
 
-    let dinnerTime = "1200";
+    // const theAssasin = (thePoison: string) => {
+    //   dinner.food = thePoison;
+    //   }
+    //   theAssasin("Maccas fries");
 
     const diplomat = (b: string, l: string, d: string) => {
       console.log(`Breakfast is ${breakfast.food} at ${b}`);
@@ -32,10 +35,17 @@ const embassy = () => {
 
     setTimeout(() => diplomat(breakfastTime, lunchTime, dinnerTime));
 
-    return diplomat;
+    return {diplomat, dinner, dinnerTime};
   };
+  let {diplomat, dinner, dinnerTime} = bedroom()
 
-  return bedroom();
+
+  const theAssasin = (thePoison: string) => {
+    dinnerTime = "1900";
+    }
+    theAssasin("Maccas fries");
+
+  return diplomat;
 };
 
 console.log("hi");
@@ -43,3 +53,8 @@ console.log("hi");
 const theDiplomat = embassy();
 
 theDiplomat("0900", "1200", "1800");
+
+// const theAssasin = (thePoison: string) => {
+// breakfast.food = thePoison;
+// }
+// theAssasin("Maccas fries");
