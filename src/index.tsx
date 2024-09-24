@@ -1,11 +1,61 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
+import { useState } from "react";
+
+// const GetTheUserToClick = () => {
+//   let clicked = false;
+//   return (
+//     <div>
+//       <input
+//         type="button"
+//         onClick={() => (clicked = true)}
+//         value="click this button"
+//       />
+//     </div>
+//   );
+// };
+
+const OminousCountdown = () => {
+  const [message, setMessage] = useState("all is well");
+  const [timeoutKey, setTimeoutKey] = useState<NodeJS.Timeout | undefined>(
+    undefined
+  );
+  return (
+    <div>
+      <h2>{message}</h2>
+      <input
+        type="button"
+        onClick={() => {
+          setMessage("the clock is ticking");
+          const timeout = setTimeout(() => {
+            setTimeoutKey(undefined);
+            setMessage("disaster has overtaken us, all is lost");
+          }, 5000);
+          setTimeoutKey(timeout);
+        }}
+        value="precipitate crisis"
+      />
+      <input
+        type="button"
+        onClick={() => {
+          if (timeoutKey !== undefined) {
+            clearTimeout(timeoutKey);
+            setTimeoutKey(undefined);
+            setMessage("all is well");
+          }
+        }}
+        value="avert crisis"
+      />
+    </div>
+  );
+};
 
 const Container = () => {
   return (
     <div className="container">
       <h3>Asynchronous functions</h3>
       <p>Open dev tools.</p>
+      <OminousCountdown />
     </div>
   );
 };
@@ -31,5 +81,8 @@ const getARandomNumberAsynchronously = () => {
   return randomNumber;
 };
 
+// Get a number from the synchronous function and print it
 console.log("Synchronously", getARandomNumberSynchronously());
+
+// Get a number from the asynchronous function and print it
 console.log("Asynchronously", getARandomNumberAsynchronously());
