@@ -1,7 +1,10 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
 
+// Let's try this first
 const noticeMe = () => alert("notice me senpai");
+// And then this one
+const noticeMeHarder = () => confirm("notice me senpai");
 
 const Container = () => {
   return (
