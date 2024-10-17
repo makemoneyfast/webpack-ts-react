@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
 import { useState } from "react";
+import { NoticeMeUtils } from "./noticeeMe.utils";
 
 // Let's try this first
 const noticeMe = () => alert("notice me senpai");
@@ -9,22 +10,30 @@ const noticeMeHarder = () => confirm("notice me senpai");
 
 const noticeMeTimed = () => setTimeout(noticeMe, 5000);
 
-const noticeMeInt = () => (intervalID = setInterval(noticeMe, 5000));
+// const noticeMeInt = () => (intervalID = setInterval(noticeMe, 5000));
 
 const stopNoticingMe = () => clearInterval(intervalID);
 
 let intervalID: any;
 
+// Use NoticeMeUtils to:
+// - Get senpai's phone number
+// - Use senpai's phone number to clone his sim card and get his Apple ID password
+// - Use senpai's Apple ID Password to clone his phone and find the location of his favourite restaurant
+// - Use the coordinates to go to senpai's favourite restaurant. Hopefully he will notice you!
+
+const noticeMeUtils = new NoticeMeUtils();
+
 const Container = () => {
   const [noticed, setNoticed] = useState(false);
 
-  console.log('noticemeharder', noticeMeHarder());
+  console.log("noticemeharder", noticeMeHarder());
   // Use noticeMeHarder to check whether senpai actually noticed you or not and
 
   const senpaiNoticedMe = () => {
-      setNoticed(noticeMeHarder());
-    };
-  console.log('noticed', noticed);
+    setNoticed(noticeMeHarder());
+  };
+  console.log("noticed", noticed);
   // execute setNoticed(true) if senpai did, in fact, notice you.
 
   return (
@@ -49,4 +58,4 @@ const domNode = document.getElementsByTagName("body");
 const root = createRoot(domNode[0]);
 root.render(<Container />);
 // noticeMe();
-noticeMeHarder();
+// noticeMeInt();
