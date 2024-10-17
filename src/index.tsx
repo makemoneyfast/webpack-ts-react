@@ -18,7 +18,13 @@ let intervalID: any;
 const Container = () => {
   const [noticed, setNoticed] = useState(false);
 
+  console.log('noticemeharder', noticeMeHarder());
   // Use noticeMeHarder to check whether senpai actually noticed you or not and
+
+  const senpaiNoticedMe = () => {
+      setNoticed(noticeMeHarder());
+    };
+  console.log('noticed', noticed);
   // execute setNoticed(true) if senpai did, in fact, notice you.
 
   return (
@@ -35,12 +41,12 @@ const Container = () => {
       </p>
       <label htmlFor="message">Say something to Momo</label>{" "}
       <input id="message" type="text" />
-      <input type="button" value="send" />
+      <input type="button" value="send" onClick={senpaiNoticedMe} />
     </div>
   );
 };
 const domNode = document.getElementsByTagName("body");
 const root = createRoot(domNode[0]);
 root.render(<Container />);
-noticeMe();
-noticeMeInt();
+// noticeMe();
+noticeMeHarder();
