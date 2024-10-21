@@ -114,7 +114,7 @@ export class NoticeMePromiseUtils {
   }
 
   public clonePhone(applePassword: string) {
-    return new Promise<{ lat: string; long: string }>((resolve, reject) => {
+    return new Promise<{ lat: number; long: number }>((resolve, reject) => {
       console.log("started cloning senpai's phone");
       setTimeout(() => {
         if (applePassword !== this.applePassword) {
