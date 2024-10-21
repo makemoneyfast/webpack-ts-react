@@ -24,6 +24,32 @@ let intervalID: any;
 
 const noticeMeUtils = new NoticeMeUtils();
 
+// - Get senpai's phone number
+
+const gotAppleIdPassword = (applePass: string) => {
+  console.log('wee i got the Apple ID password:', applePass);
+  noticeMeUtils.clonePhone(applePass, gotRestaurantLocation);
+}
+
+const cloneSim = (phoneNumber: number, gotAppleIdPassword: any) => {
+  noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword) 
+}
+
+const gotPhoneNumber = (phoneNumber: number) => {
+  console.log('wee i got the phone number:', phoneNumber);
+  cloneSim(phoneNumber, gotAppleIdPassword)
+  noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword);
+}
+
+const getSenpaiPhoneNumber = () => {
+  noticeMeUtils.getPhoneNumber(gotPhoneNumber) 
+}
+
+const gotRestaurantLocation  = (location: { lat: number; long: number }) => {
+  console.log(`Wee, I got the restaurant's location: Latitude: ${location.lat}, Longitude: ${location.long}`);
+}
+
+
 const Container = () => {
   const [noticed, setNoticed] = useState(false);
 
@@ -57,5 +83,7 @@ const Container = () => {
 const domNode = document.getElementsByTagName("body");
 const root = createRoot(domNode[0]);
 root.render(<Container />);
+getSenpaiPhoneNumber();
+// cloneSim();
 // noticeMe();
 // noticeMeInt();
