@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
 import { useState } from "react";
-import { NoticeMeUtils } from "./noticeeMe.utils";
+import { NoticeMePromiseUtils, NoticeMeUtils } from "./noticeeMe.utils";
 
 // Let's try this first
 const noticeMe = () => alert("notice me senpai");
@@ -22,32 +22,51 @@ let intervalID: any;
 // - Use senpai's Apple ID Password to clone his phone and find the location of his favourite restaurant
 // - Use the coordinates to go to senpai's favourite restaurant. Hopefully he will notice you!
 
-const noticeMeUtils = new NoticeMeUtils();
+const noticeMeUtils = new NoticeMePromiseUtils();
 
 // - Get senpai's phone number
 
 const gotAppleIdPassword = (applePass: string) => {
   console.log('wee i got the Apple ID password:', applePass);
-  noticeMeUtils.clonePhone(applePass, gotRestaurantLocation);
+  // noticeMeUtils.clonePhone(applePass, gotRestaurantLocation);
 }
 
-const cloneSim = (phoneNumber: number, gotAppleIdPassword: any) => {
-  noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword) 
-}
+// const cloneSim = (phoneNumber: number, gotAppleIdPassword: any) => {
+//   noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword) 
+// }
 
 const gotPhoneNumber = (phoneNumber: number) => {
   console.log('wee i got the phone number:', phoneNumber);
-  cloneSim(phoneNumber, gotAppleIdPassword)
-  noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword);
+  const clonedSim = noticeMeUtils.cloneSimCard(phoneNumber)
+  clonedSim.then(gotAppleIdPassword)
+  // cloneSim(phoneNumber, gotAppleIdPassword)
+  // noticeMeUtils.cloneSimCard(phoneNumber, gotAppleIdPassword);
 }
 
-const getSenpaiPhoneNumber = () => {
-  noticeMeUtils.getPhoneNumber(gotPhoneNumber) 
-}
+// const getSenpaiPhoneNumber = () => {
+//   noticeMeUtils.getPhoneNumber(gotPhoneNumber) 
+// }
 
-const gotRestaurantLocation  = (location: { lat: number; long: number }) => {
-  console.log(`Wee, I got the restaurant's location: Latitude: ${location.lat}, Longitude: ${location.long}`);
-}
+// const gotRestaurantLocation  = (location: { lat: number; long: number }) => {
+//   console.log(`Wee, I got the restaurant's location: Latitude: ${location.lat}, Longitude: ${location.long}`);
+// }
+
+//Promise
+
+// const getSenpaiPhoneNumberPromise = () => {
+//   SenpaiPhoneNumber.then
+
+// }
+
+noticeMeUtils
+  .getPhoneNumber()
+  .then((phone) => noticeMeUtils.cloneSimCard(phone))
+  .then((appleId) => noticeMeUtils.clonePhone(appleId))
+  .then((location) => noticeMeUtils.goToRestaurant(location));
+
+const SenpaiPhoneNumber = noticeMeUtils.getPhoneNumber()
+SenpaiPhoneNumber.then(gotPhoneNumber)
+
 
 
 const Container = () => {
@@ -76,14 +95,15 @@ const Container = () => {
       </p>
       <label htmlFor="message">Say something to Momo</label>{" "}
       <input id="message" type="text" />
-      <input type="button" value="send" onClick={senpaiNoticedMe} />
+      <input type="button" value="send"/>
     </div>
   );
 };
 const domNode = document.getElementsByTagName("body");
 const root = createRoot(domNode[0]);
 root.render(<Container />);
-getSenpaiPhoneNumber();
+// SenpaiPhoneNumber();
 // cloneSim();
 // noticeMe();
 // noticeMeInt();
+console.log('phoneno:',SenpaiPhoneNumber);
