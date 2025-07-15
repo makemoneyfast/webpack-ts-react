@@ -1,15 +1,17 @@
 import { render } from "react-dom";
-import { Rofl } from "./example";
+import { fetchTest } from "./fetchTest";
+import { HeadingWithSideEffect } from "worthless-package";
 
 import "./style.css";
 
 const element = document.createElement("div");
 document.body.appendChild(element);
 
+fetchTest("Japan");
+
 render(
   <div>
-    <h1>Hello! I am React in Typescript.</h1>
-    <Rofl count={10} />
+    <HeadingWithSideEffect caption="whatever" />
   </div>,
   element
 );
