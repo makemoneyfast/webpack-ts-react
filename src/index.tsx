@@ -1,10 +1,13 @@
 import { render } from "react-dom";
 import { Rofl } from "./example";
+import { getPictures } from "./pictures";
 
 import "./style.css";
 
 const element = document.createElement("div");
 document.body.appendChild(element);
+
+getPictures();
 
 render(
   <div>
