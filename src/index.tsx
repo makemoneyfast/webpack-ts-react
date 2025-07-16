@@ -107,3 +107,28 @@ root.render(<Container />);
 // noticeMe();
 // noticeMeInt();
 console.log('phoneno:',SenpaiPhoneNumber);
+
+
+const inputs = [1, 2, 3, 4, 5];
+const target = 3;
+
+const sum = (inputs: number[], target: number) => {
+  // const firstNumber = inputs[0];
+  // // second number is the difference between target and first number
+  // const numberTwo = target - firstNumber;
+
+  // loop through the inputs to find the second number
+  for (let i = 0; i < inputs.length; i++) {
+    const thisNumber = inputs[i]; //the current number in the loop
+    const thatNumber = target - thisNumber; //the number we need to find
+
+  const j = inputs.indexOf(thatNumber); //find the index of that number in the inputs array
+
+  // check if the index is valid and not the same as the current index
+  if (j !== -1 && j !== i) {
+      return [i, j]
+  }
+}
+} 
+
+console.log(sum([1, 2, 3, 4, 5], 3));
