@@ -1,18 +1,17 @@
-import { render } from "react-dom";
-import { Rofl } from "./example";
-import { getPictures } from "./pictures";
+import { createRoot } from "react-dom/client";
+import { Rofl, findHighAccessEmployees } from "./example";
 
 import "./style.css";
 
-const element = document.createElement("div");
-document.body.appendChild(element);
+const container = document.getElementById("root");
+if (!container) {
+  throw new Error("Root element not found");
+}
 
-getPictures();
-
-render(
+const root = createRoot(container);
+root.render(
   <div>
     <h1>Hello! I am React in Typescript.</h1>
     <Rofl count={10} />
-  </div>,
-  element
+  </div>
 );

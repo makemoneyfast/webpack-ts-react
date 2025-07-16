@@ -25,20 +25,26 @@ module.exports = {
   mode: "development",
   entry: {
     main: "./src/index.tsx",
-    extra: "./src/extra.ts",
   },
   output: {
     filename: "[name]-[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  devtool: "inline-source-map",
+  devtool: "eval-source-map",
   devServer: {
     static: "./dist",
+    hot: true,
+    open: true,
+    historyApiFallback: true,
+    compress: true,
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Something something",
+      title: "Modern React TypeScript App",
+      template: "./src/index.html",
+      inject: true,
     }),
     new WebpackManifestPlugin(manifestOptions),
   ],
@@ -60,5 +66,15 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: "single",
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
   },
 };
