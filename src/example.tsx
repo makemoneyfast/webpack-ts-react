@@ -8,80 +8,107 @@ export const Rofl = (props: { count: number }) => (
   <h1>{"ROFL!".repeat(props.count)}</h1>
 );
 
-interface UserWithAccessTimes {
-  id: string;
-  accessTimes: number[];
+interface ListNode<T> {
+  next?: ListNode<T>;
+  previous?: ListNode<T>;
+  value: T;
 }
 
-export function findHighAccessEmployees(access_times: string[][]): string[] {
-  // Converts a time into a number between 0 and 24 * 60 - 1
-  const convertTime = (timeString: string) => {
-    const hours = parseInt(timeString.slice(0, 2));
-    const minutes = parseInt(timeString.slice(2));
-    return hours * 60 + minutes;
+export class LRUCache {
+  constructor(private capacity: number) {
+    this.terminalNode = { value: Number.POSITIVE_INFINITY };
+    this.accessQueue = this.terminalNode;
+    this.terminalNode.next = this.terminalNode;
+    this.terminalNode.previous = this.terminalNode;
+  }
+
+  private terminalNode: ListNode<number> | undefined = {
+    value: Number.POSITIVE_INFINITY,
   };
 
-  // Finds a user with multiple accesses
-  const isFrequentAccessEmployee = (user: UserWithAccessTimes) => {
-    // Need at least three accesses to qualify
-    if (user.accessTimes.length < 3) {
-      return false;
+  private accessQueue: ListNode<number> | undefined = this.terminalNode;
+
+  private store: Map<number, ListNode<number>> = new Map();
+  private elementCount = 0;
+
+  // If key is in cache, return; else return -1
+  get(key: number): number {
+    if (!this.accessQueue) {
+      throw new Error("Access queue is somehow undefined");
+    }
+    const listNode = this.store.get(key);
+
+    // If we retrieved nothing we return -1.
+    if (listNode === undefined) {
+      return -1;
     }
 
-    // Sort access times in ascending order.
-    const accessTimes = user.accessTimes.sort((a, b) => a - b);
-    console.log(`access times for ${user.id}`, accessTimes);
-
-    // For each access time, check if the next next access time is less than an hour later
-    for (
-      let startIndex = 0;
-      startIndex < user.accessTimes.length - 2;
-      startIndex++
-    ) {
-      console.log("testing access time", user.accessTimes[startIndex] + 60);
-      console.log("comparator time", user.accessTimes[startIndex + 2]);
-      if (
-        user.accessTimes[startIndex + 2] <
-        user.accessTimes[startIndex] + 60
-      ) {
-        console.log(`hit for ${user.id}`);
-        // it is, return true
-        return true;
-      }
-      console.log("looping");
+    // We need to update the access tracking.
+    // Remove it from the array.
+    const formerPrevious = listNode.previous;
+    const formerNext = listNode.next;
+    if (formerPrevious && formerNext) {
+      formerPrevious.next = formerNext;
+      formerNext.previous = formerPrevious;
+    } else {
+      throw new Error("Broken list in `get`, panicking at first opportunity");
     }
-    // or return false.
-    return false;
-  };
+    // Graft it into the start of the array.
+    const currentFirstNode = this.accessQueue;
+    const currentSecondNode = this.accessQueue.next;
+    if (currentFirstNode && currentSecondNode) {
+      // graft
+      currentFirstNode.next = this.accessQueue;
+      this.accessQueue.previous = currentFirstNode;
+      currentSecondNode.previous = this.accessQueue;
+      this.accessQueue.next = currentSecondNode;
+    } else {
+      throw new Error("Broken list in `get`, panicking at second opportunity");
+    }
 
-  const betterRepresentation = new Map<string, UserWithAccessTimes>();
+    return listNode === undefined ? -1 : listNode.value;
+  }
 
-  access_times.reduce(
-    (map: Map<string, UserWithAccessTimes>, logEntry: string[]) => {
-      console.log("log entry", logEntry);
-      // Create new entry if none exists
-      let entry: UserWithAccessTimes | undefined;
-      const userId = logEntry[0];
+  // Put value in cache. If at capacity evict last-used value first.
+  put(key: number, value: number): void {
+    this.elementCount;
 
-      if (!map.has(userId)) {
-        entry = { id: userId, accessTimes: [] };
-        map.set(userId, entry);
-      } else {
-        entry = map.get(userId);
-      }
+    const listNode = this.store.get(key);
+    if (listNode) {
+      listNode.value = value;
+      return;
+    }
 
-      entry?.accessTimes.push(convertTime(logEntry[1]));
-      return map;
-    },
-    betterRepresentation
-  );
+    if (this.elementCount == this.capacity) {
+      // need to evict.
+      // Which key to evict?
+      queueMicrotask(() => {
+        const iterator = this.store.keys();
+        let i = 1;
+        // walk map keys and find last element. Delete.
+        while (i++ < this.store.size && iterator.next()) {
+          /* empty */
+        }
+        const nextKey = iterator.next().value;
+        if (nextKey) {
+          this.store.delete(nextKey);
+        } else {
+          console.log("oops");
+        }
+      });
+      this.elementCount--;
+    }
 
-  console.log(betterRepresentation);
-
-  // let's iterate over the map entries and test them
-  const frequentAccessEmployeeIds = [...betterRepresentation]
-    .filter((user) => isFrequentAccessEmployee(user[1]))
-    .map((entry) => entry[0]);
-
-  return frequentAccessEmployeeIds;
+    // Update capacity tracking
+    this.elementCount++;
+    // And store.
+    this.store.set(key, value);
+  }
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
