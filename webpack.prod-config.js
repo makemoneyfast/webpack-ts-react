@@ -25,7 +25,6 @@ module.exports = {
   mode: "production",
   entry: {
     main: "./src/index.tsx",
-    extra: "./src/extra.ts",
   },
   output: {
     filename: "[name]-[contenthash].js",
@@ -34,7 +33,21 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Playpen",
+      title: "Modern React TypeScript App",
+      template: "./src/index.html",
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
     }),
     new WebpackManifestPlugin(manifestOptions),
   ],
@@ -53,5 +66,19 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+    usedExports: true,
+    sideEffects: false,
   },
 };
