@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { Rofl, findHighAccessEmployees } from "./example";
+import { Rofl, longestPalindrome } from "./example";
 
 import "./style.css";
 
@@ -12,6 +12,8 @@ const root = createRoot(container);
 root.render(
   <div>
     <h1>Hello! I am React in Typescript.</h1>
-    <Rofl count={10} />
+    {
+      longestPalindrome("babad") // Example usage of longestPalindrome function
+    }
   </div>
 );
