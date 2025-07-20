@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
@@ -39,8 +40,20 @@ module.exports = {
     historyApiFallback: true,
     compress: true,
     port: 3000,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("development"),
+    }),
     new HtmlWebpackPlugin({
       title: "Modern React TypeScript App",
       template: "./src/index.html",
