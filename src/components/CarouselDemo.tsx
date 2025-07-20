@@ -1,237 +1,217 @@
-import React from 'react';
-import { Carousel } from './Carousel';
+import React from "react";
+import { Carousel } from "./Carousel";
+import styles from "./CarouselDemo.module.css";
+import {
+  createGradientSlides,
+  createPlaceholderSlides,
+} from "./CarouselContent";
+import { CarouselSlide } from "./CarouselSlide";
+import "./CarouselDemo.module.css";
 
 const CarouselDemo: React.FC = () => {
-  // Sample data for the carousel
-  const carouselItems = [
-    {
-      id: 1,
-      content: (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          color: 'white',
-          padding: '60px 40px',
-          textAlign: 'center' as const,
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', fontSize: '2.5rem' }}>Slide 1</h2>
-          <p style={{ margin: 0, fontSize: '1.2rem', opacity: 0.9 }}>
-            Beautiful gradient background with modern design
-          </p>
-        </div>
-      )
-    },
-    {
-      id: 2,
-      content: (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-          color: 'white',
-          padding: '60px 40px',
-          textAlign: 'center' as const,
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', fontSize: '2.5rem' }}>Slide 2</h2>
-          <p style={{ margin: 0, fontSize: '1.2rem', opacity: 0.9 }}>
-            Intersection Observer API for smooth detection
-          </p>
-        </div>
-      )
-    },
-    {
-      id: 3,
-      content: (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-          color: 'white',
-          padding: '60px 40px',
-          textAlign: 'center' as const,
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', fontSize: '2.5rem' }}>Slide 3</h2>
-          <p style={{ margin: 0, fontSize: '1.2rem', opacity: 0.9 }}>
-            Keyboard navigation and accessibility support
-          </p>
-        </div>
-      )
-    },
-    {
-      id: 4,
-      content: (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-          color: 'white',
-          padding: '60px 40px',
-          textAlign: 'center' as const,
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', fontSize: '2.5rem' }}>Slide 4</h2>
-          <p style={{ margin: 0, fontSize: '1.2rem', opacity: 0.9 }}>
-            Auto-play with pause on hover functionality
-          </p>
-        </div>
-      )
-    },
-    {
-      id: 5,
-      content: (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-          color: 'white',
-          padding: '60px 40px',
-          textAlign: 'center' as const,
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center'
-        }}>
-          <h2 style={{ margin: '0 0 16px 0', fontSize: '2.5rem' }}>Slide 5</h2>
-          <p style={{ margin: 0, fontSize: '1.2rem', opacity: 0.9 }}>
-            Responsive design with touch support
-          </p>
-        </div>
-      )
-    }
-  ];
+  // Generate different types of carousel content
+  const gradientSlides = createGradientSlides(5, 300);
+  const placeholderSlides = createPlaceholderSlides(3, 250);
 
-  const imageCarouselItems = [
+  // Custom mixed content example
+  const mixedSlides = [
     {
-      id: 'img1',
+      id: "welcome",
       content: (
-        <div style={{ 
-          background: '#f8f9fa',
-          padding: '40px',
-          textAlign: 'center' as const,
-          height: '250px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center',
-          border: '2px dashed #dee2e6'
-        }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🖼️</div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#495057' }}>Image Placeholder 1</h3>
-          <p style={{ margin: 0, color: '#6c757d' }}>Replace with actual images</p>
-        </div>
-      )
+        <CarouselSlide
+          title="Welcome to Our Platform"
+          description="Experience the power of modern web development with React and TypeScript"
+          gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          variant="gradient"
+          height={300}
+        />
+      ),
     },
     {
-      id: 'img2',
+      id: "features",
       content: (
-        <div style={{ 
-          background: '#f8f9fa',
-          padding: '40px',
-          textAlign: 'center' as const,
-          height: '250px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center',
-          border: '2px dashed #dee2e6'
-        }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>📸</div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#495057' }}>Image Placeholder 2</h3>
-          <p style={{ margin: 0, color: '#6c757d' }}>Supports any content type</p>
-        </div>
-      )
+        <CarouselSlide
+          title="Advanced Features"
+          description="Built with Intersection Observer API for optimal performance and user experience"
+          icon="⚡"
+          gradient="linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)"
+          variant="content"
+          height={300}
+          textColor="#2c3e50"
+        />
+      ),
     },
     {
-      id: 'img3',
+      id: "gallery",
       content: (
-        <div style={{ 
-          background: '#f8f9fa',
-          padding: '40px',
-          textAlign: 'center' as const,
-          height: '250px',
-          display: 'flex',
-          flexDirection: 'column' as const,
-          justifyContent: 'center',
-          border: '2px dashed #dee2e6'
-        }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎨</div>
-          <h3 style={{ margin: '0 0 8px 0', color: '#495057' }}>Image Placeholder 3</h3>
-          <p style={{ margin: 0, color: '#6c757d' }}>Fully customizable styling</p>
-        </div>
-      )
-    }
+        <CarouselSlide
+          title="Media Gallery"
+          description="Showcase your images, videos, and other media content beautifully"
+          icon="🎬"
+          gradient="#f8f9fa"
+          variant="placeholder"
+          height={300}
+          textColor="#495057"
+        />
+      ),
+    },
+    {
+      id: "responsive",
+      content: (
+        <CarouselSlide
+          title="Fully Responsive"
+          description="Optimized for all devices with touch support and mobile-first design"
+          gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+          variant="gradient"
+          height={300}
+        />
+      ),
+    },
   ];
 
   return (
-    <div style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>
-        React Carousel with Intersection Observer
-      </h1>
-      
-      <div style={{ marginBottom: '60px' }}>
-        <h2 style={{ marginBottom: '20px', color: '#34495e' }}>
-          Auto-Play Carousel
-        </h2>
-        <p style={{ marginBottom: '30px', color: '#7f8c8d', lineHeight: 1.6 }}>
-          This carousel automatically plays when visible and pauses when out of view, 
-          thanks to the Intersection Observer API. Use arrow keys to navigate!
+    <div className="carousel-demo-container">
+      <header className={styles.header}>
+        <h1 className={styles.title}>
+          React Carousel with Intersection Observer
+        </h1>
+        <p className={styles.subtitle}>
+          Demonstrating modular, parameterized content components with CSS
+          Modules
         </p>
-        <Carousel 
-          items={carouselItems}
-          autoPlay={true}
-          autoPlayInterval={4000}
-          showDots={true}
-          showArrows={true}
-          infinite={true}
-        />
-      </div>
+      </header>
 
-      <div style={{ marginBottom: '60px' }}>
-        <h2 style={{ marginBottom: '20px', color: '#34495e' }}>
-          Manual Navigation Carousel
-        </h2>
-        <p style={{ marginBottom: '30px', color: '#7f8c8d', lineHeight: 1.6 }}>
-          This carousel requires manual navigation. Perfect for image galleries 
-          or when you want users to control the pace.
-        </p>
-        <Carousel 
-          items={imageCarouselItems}
-          autoPlay={false}
-          showDots={true}
-          showArrows={true}
-          infinite={false}
-        />
-      </div>
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Auto-Play Carousel</h2>
+          <p className={styles.sectionDescription}>
+            This carousel automatically plays when visible and pauses when out
+            of view, thanks to the Intersection Observer API. Use arrow keys to
+            navigate!
+          </p>
+        </div>
+        <div className={styles.carouselWrapper}>
+          <Carousel
+            items={gradientSlides}
+            autoPlay={true}
+            autoPlayInterval={4000}
+            showDots={true}
+            showArrows={true}
+            infinite={true}
+          />
+        </div>
+      </section>
 
-      <div style={{ 
-        background: '#f8f9fa', 
-        padding: '30px', 
-        borderRadius: '8px',
-        marginTop: '40px'
-      }}>
-        <h3 style={{ marginBottom: '20px', color: '#2c3e50' }}>Features:</h3>
-        <ul style={{ 
-          listStyle: 'none', 
-          padding: 0, 
-          margin: 0,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '16px'
-        }}>
-          <li style={{ color: '#495057' }}>✅ Intersection Observer API</li>
-          <li style={{ color: '#495057' }}>✅ Auto-play with viewport detection</li>
-          <li style={{ color: '#495057' }}>✅ Keyboard navigation (Arrow keys)</li>
-          <li style={{ color: '#495057' }}>✅ Touch/swipe support ready</li>
-          <li style={{ color: '#495057' }}>✅ Accessibility compliant</li>
-          <li style={{ color: '#495057' }}>✅ Responsive design</li>
-          <li style={{ color: '#495057' }}>✅ Infinite loop option</li>
-          <li style={{ color: '#495057' }}>✅ Customizable styling</li>
-        </ul>
-      </div>
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Manual Navigation Carousel</h2>
+          <p className={styles.sectionDescription}>
+            This carousel requires manual navigation. Perfect for image
+            galleries or when you want users to control the pace.
+          </p>
+        </div>
+        <div className={styles.carouselWrapper}>
+          <Carousel
+            items={placeholderSlides}
+            autoPlay={false}
+            showDots={true}
+            showArrows={true}
+            infinite={false}
+          />
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Mixed Content Carousel</h2>
+          <p className={styles.sectionDescription}>
+            Demonstrating different slide variants in a single carousel with
+            custom content and varied styling approaches.
+          </p>
+        </div>
+        <div className={styles.carouselWrapper}>
+          <Carousel
+            items={mixedSlides}
+            autoPlay={true}
+            autoPlayInterval={5000}
+            showDots={true}
+            showArrows={true}
+            infinite={true}
+          />
+        </div>
+      </section>
+
+      <section className={styles.featuresSection}>
+        <h3 className={styles.featuresTitle}>Component Features</h3>
+        <div className={styles.featuresGrid}>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>🔍</span>
+            <span className={styles.featureText}>
+              Intersection Observer API
+            </span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>▶️</span>
+            <span className={styles.featureText}>
+              Auto-play with viewport detection
+            </span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>⌨️</span>
+            <span className={styles.featureText}>
+              Keyboard navigation (Arrow keys)
+            </span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>📱</span>
+            <span className={styles.featureText}>
+              Touch/swipe support ready
+            </span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>♿</span>
+            <span className={styles.featureText}>Accessibility compliant</span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>📐</span>
+            <span className={styles.featureText}>Responsive design</span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>🔄</span>
+            <span className={styles.featureText}>Infinite loop option</span>
+          </div>
+          <div className={styles.feature}>
+            <span className={styles.featureIcon}>🎨</span>
+            <span className={styles.featureText}>CSS Modules styling</span>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.architectureSection}>
+        <h3 className={styles.architectureTitle}>Architecture Highlights</h3>
+        <div className={styles.architectureList}>
+          <div className={styles.architectureItem}>
+            <strong>Modular Components:</strong> Separate slide content from
+            carousel logic
+          </div>
+          <div className={styles.architectureItem}>
+            <strong>CSS Modules:</strong> Scoped styling prevents conflicts and
+            improves maintainability
+          </div>
+          <div className={styles.architectureItem}>
+            <strong>Parameterized Content:</strong> Flexible content generation
+            with configurable options
+          </div>
+          <div className={styles.architectureItem}>
+            <strong>TypeScript Integration:</strong> Full type safety with
+            proper interfaces
+          </div>
+          <div className={styles.architectureItem}>
+            <strong>Performance Optimized:</strong> Intersection Observer for
+            efficient viewport detection
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

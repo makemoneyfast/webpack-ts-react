@@ -60,7 +60,22 @@ module.exports = {
       },
       {
         test: /\.css$/i,
+        exclude: /\.module\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.module\.css$/i,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[hash:base64:8]",
+              },
+            },
+          },
+        ],
       },
     ],
   },
