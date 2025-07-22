@@ -33,7 +33,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Modern React TypeScript App",
+      title: "Exercise",
       template: "./src/index.html",
       inject: true,
       minify: {

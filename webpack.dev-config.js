@@ -55,7 +55,7 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify("development"),
     }),
     new HtmlWebpackPlugin({
-      title: "Modern React TypeScript App",
+      title: "Exercise",
       template: "./src/index.html",
       inject: true,
     }),
