@@ -8,13 +8,24 @@ import {
 import { CarouselSlide } from "./CarouselSlide";
 import "./CarouselDemo.module.css";
 
-const CarouselDemo: React.FC = () => {
+interface CarouselDemoProps {
+  attack: () => void;
+  slideCount: number;
+}
+
+const CarouselDemo: React.FC<CarouselDemoProps> = ({ slideCount }) => {
   // Generate different types of carousel content
-  const gradientSlides = createGradientSlides(5, 300);
-  const placeholderSlides = createPlaceholderSlides(3, 250);
+  const gradientSlides = createGradientSlides(
+    Math.floor(Math.random() * 10),
+    300
+  );
+  const placeholderSlides = createPlaceholderSlides(
+    Math.floor(Math.random() * 10),
+    250
+  );
 
   // Custom mixed content example
-  const mixedSlides = [
+  const slides = [
     {
       id: "welcome",
       content: (
@@ -68,6 +79,10 @@ const CarouselDemo: React.FC = () => {
       ),
     },
   ];
+
+  const mixedSlides = ([] as number[]).fill(1, slideCount).map((value) => {
+    return slides[Math.floor(Math.random() * 4)];
+  });
 
   return (
     <div className="carousel-demo-container">
