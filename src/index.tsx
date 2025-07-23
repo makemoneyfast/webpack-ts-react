@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { exercise } from "./example";
+import { divide } from "./example";
 
 import "./style.css";
 
@@ -13,13 +13,13 @@ console.log(
   `%c   Exercise output follows   `,
   "background-color: #FC0; color: #333; font-weight: bold"
 );
-console.log(exercise());
+console.log(divide());
 
 const App = () => {
   return (
     <div>
       <h1>Exercise output.</h1>
-      <pre>{`${exercise()}`}</pre>
+      <pre>{`${divide()}`}</pre>
     </div>
   );
 };
